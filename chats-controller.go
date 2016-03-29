@@ -13,6 +13,8 @@ import (
 const (
 
 	JOAN_CHAT_ID int64 = 146665083
+	ONEBOX_ALERT_CHAT_ID int64 = -126617985
+	GROUP_TEST_CHAT_ID int64 = -117924915
 
 )
 
@@ -48,11 +50,20 @@ func ChatsController(w http.ResponseWriter, request *http.Request) {
 	}
 
 	// Set json response struct
+	var chats []*ChatResponseType
 	chat := new(ChatResponseType)
 	chat.Id = JOAN_CHAT_ID
 	chat.Description = "Joan Oliva TEST Telegram Chat"
-	var chats []*ChatResponseType
 	chats = append(chats, chat)
+	chat = new(ChatResponseType)
+	chat.Id = ONEBOX_ALERT_CHAT_ID
+	chat.Description = "Onebox Alert chat"
+	chats = append(chats, chat)
+	chat = new(ChatResponseType)
+	chat.Id = GROUP_TEST_CHAT_ID
+	chat.Description = "Group Test chat"
+	chats = append(chats, chat)
+
 	chatsResponse := new(ChatsResponseType)
 	chatsResponse.Chats = chats
 

@@ -18,6 +18,8 @@ Build Docker image with
 ## TODO list
 + make bot to be listenig the chat and answer basic questions (/status, /who is down, ...)
 + manage chats and people from chat
++ unit tests
++ dockerize
 
 
 ## Optional TODO list

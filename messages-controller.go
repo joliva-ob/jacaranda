@@ -26,7 +26,7 @@ type MessageResponseType struct {
 /**
  * Messages resource endpoint
  */
-func MessagesController(w http.ResponseWriter, request *http.Request) {
+func SendMessagesController(w http.ResponseWriter, request *http.Request) {
 
 	sentStatus := STATUS_OK
 	uuid := GetUuid()
@@ -42,9 +42,6 @@ func MessagesController(w http.ResponseWriter, request *http.Request) {
 
 	// GET request params
 	chatId, err := strconv.ParseInt(request.URL.Query().Get(CHAT_ID),10,64)
-	if err != nil {
-		chatId = JOAN_CHAT_ID
-	}
 	text = request.URL.Query().Get(TEXT)
 
 	// Send the message to the given chat id

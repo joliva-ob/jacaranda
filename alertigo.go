@@ -36,7 +36,7 @@ func main() {
 	// Create the router to handle requests
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/alertigo/1.0/chats", ChatsController)
-	router.HandleFunc("/alertigo/1.0/sendMessage", MessagesController)
+	router.HandleFunc("/alertigo/1.0/sendMessage", SendMessagesController)
 	router.HandleFunc("/alertigo/1.0/info", InfoController)
 	router.HandleFunc("/alertigo/1.0/health", HealthController)
 
