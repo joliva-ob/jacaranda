@@ -26,7 +26,7 @@ func main() {
 	var filename = os.Args[1] + "/" + os.Args[2] + ".yml"
 	config = LoadConfiguration(filename)
 	log = GetLog()
-	InitializeTelegramBot()
+	InitializeTelegramBot() // Create and initialize the bot
 	log.Infof("alertigo started with environment: %s and listening in port: %v\n", os.Args[2], config.Server_port)
 
 	// Register to Eureka and then set up to only heartbeat one of them
@@ -41,6 +41,7 @@ func main() {
 	router.HandleFunc("/alertigo/1.0/health", HealthController)
 
 	// Starting server on given port number
+	go ListenQueryChatMessages() // Start goroutine to asynchronous listen and answer queries from a chat
 	log.Fatal( http.ListenAndServe(":" + config.Server_port, router) ) // Start the server at listening port
 
 }
