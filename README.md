@@ -1,17 +1,17 @@
-# alertigo
+# jacaranda 
 Golang alerting api for Telegram messaging, tho goal is to have a chat where one of the guests will be a bot.
 Hence, this bot will be able to send alert messages to the group and also be able to be listening the conversation 
 in order to answer some technical questions. (ie: /status, and anything starting by a slash).
 
 Compiled with runtime with: 
-+ GOOS=windows GOARCH=386 go build -o alertigo.exe alertigo.go
-+ GOOS=linux GOARCH=386 go build -o alertigo.linux alertigo.go
-+ GOOS=darwin GOARCH=386 go build -o alertigo alertigo.go
++ GOOS=windows GOARCH=386 go build -o jacaranda.exe jacaranda.go
++ GOOS=linux GOARCH=386 go build -o jacaranda.linux jacaranda.go
++ GOOS=darwin GOARCH=386 go build -o jacaranda jacaranda.go
 
 Build Docker image with
 + cp /source_cfg_files/*env* .
-+ docker build -f docker/Dockerfile . -tag alertigo
-+ docker run --publish 8000:8000 --name alertigo --rm alertigo --restart=always alertigo
++ docker build -f docker/Dockerfile . -tag jacaranda 
++ docker run --publish 8000:8000 --name jacaranda --rm jacaranda --restart=always jacaranda 
 
 
 
