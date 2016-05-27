@@ -7,7 +7,6 @@ import (
 	"fmt"
 
 	"github.com/gorilla/mux"
-	"github.com/hudl/fargo"
 
 )
 
@@ -29,9 +28,14 @@ func main() {
 	InitializeTelegramBot() // Create and initialize the bot
 	log.Infof("alertigo started with environment: %s and listening in port: %v\n", os.Args[2], config.Server_port)
 
-	// Register to Eureka and then set up to only heartbeat one of them
-	filename = os.Args[1] + "/eureka_" + os.Args[2] + ".gcfg"
-	registerToEureka( filename )
+
+	// Starting server on given port number and listen for a chat conversation
+	go ListenQueryChatMessages()
+
+
+	// Starting alerts whatchdog
+	startAlertsWatchdogs()
+
 
 	// Create the router to handle requests
 	router := mux.NewRouter().StrictSlash(true)
@@ -39,10 +43,7 @@ func main() {
 	router.HandleFunc("/alertigo/1.0/sendMessage", SendMessagesController)
 	router.HandleFunc("/alertigo/1.0/info", InfoController)
 	router.HandleFunc("/alertigo/1.0/health", HealthController)
-
-	// Starting server on given port number
-	go ListenQueryChatMessages() // Start goroutine to asynchronous listen and answer queries from a chat
-	log.Fatal( http.ListenAndServe(":" + config.Server_port, router) ) // Start the server at listening port
+	log.Fatal( http.ListenAndServe(":" + config.Server_port, router) )
 
 }
 
@@ -64,26 +65,3 @@ func  checkParams(  args []string ) {
 }
 
 
-// Register and keep the eureka connection
-func registerToEureka( configFile string )  {
-
-	eurekaConn, _ = fargo.NewConnFromConfigFile(configFile)
-	hostname, _ := os.Hostname()
-	i := fargo.Instance{
-		HostName:         hostname,
-		Port:             8000,
-		App:              config.Eureka_app_name,
-		IPAddr:           hostname,
-		VipAddress:       config.Eureka_app_name,
-		DataCenterInfo:   fargo.DataCenterInfo{Name: fargo.Amazon},
-		SecureVipAddress: config.Eureka_ip_addr,
-		Status:           fargo.UP,
-		HealthCheckUrl:	  "http://" +hostname+ ":" +config.Server_port+ "/alertigo/1.0/health",
-		StatusPageUrl:	  "http://" +hostname+ ":" +config.Server_port+ "/alertigo/1.0/health",
-		HomePageUrl:      "http://" +hostname+ ":" +config.Server_port+ "/alertigo/1.0/health",
-	}
-	err := eurekaConn.RegisterInstance(&i)
-	if err != nil {
-		log.Error("%v", err)
-	}
-}

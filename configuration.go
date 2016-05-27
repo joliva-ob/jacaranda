@@ -7,18 +7,30 @@ import (
 
 	"gopkg.in/yaml.v2"
 	"github.com/op/go-logging"
-	"github.com/hudl/fargo"
 )
 
 
 // Global vars
-var config Config
+var config ConfigType
 var log = logging.MustGetLogger("alertigo")
-var eurekaConn fargo.EurekaConnection
+
+
+
+type RuleType struct{
+
+	Alert_name string
+	Elk_index string
+	Elk_host string
+	Threashold int
+	Time_window int
+	Time_frame_sec int
+	Min_num_events int
+	Elk_filter string
+}
 
 
 // Instance configuration
-type Config struct {
+type ConfigType struct {
 
 	Server_port string
 	Log_file string
@@ -27,6 +39,7 @@ type Config struct {
 	Eureka_ip_addr string
 	Eureka_app_name string
 	Telegram_bot_token string
+	Rules [] RuleType
 }
 
 
@@ -34,7 +47,7 @@ type Config struct {
 /**
  * Load configuration yaml file
  */
-func LoadConfiguration(filename string) Config {
+func LoadConfiguration(filename string) ConfigType {
 
 	// Set config
 	source, err := ioutil.ReadFile(filename)
@@ -47,6 +60,7 @@ func LoadConfiguration(filename string) Config {
 		panic(err)
 	}
 	fmt.Printf("--> Configuration loaded values: %#v\n", config)
+
 
 	// Set logger
 	format := logging.MustStringFormatter( config.Log_format )
@@ -62,16 +76,3 @@ func LoadConfiguration(filename string) Config {
 
 	return config
 }
-
-
-// Return the already configured logger
-func GetLog() *logging.Logger{
-	return log
-}
-
-
-// Return the already loaded configuration
-func GetConfig() Config {
-	return config
-}
-
