@@ -20,7 +20,9 @@ type RuleType struct{
 
 	Alert_name string
 	Elk_index string
-	Elk_host string
+	Elk_name string
+	Elk_value string
+	Elk_usage string
 	Threashold int
 	Time_window int
 	Time_frame_sec int

@@ -16,17 +16,15 @@ Build Docker image with
 
 
 ## TODO list
-+ make bot to be listenig the chat and answer basic questions (/status, /who is down, ...)
-+ manage chats and people from chat
-+ unit tests
-+ dockerize
-
-
-## Optional TODO list
++ start alerts from configuration file
++ endpoint to reload alert rules from configuration file
++ control the go routines over a channel to stop, start, reload config
++ check unit tests coverage
++ dockerization
 
 
 
 ## DONE list
 + load configuration from yml file
-+ register to eureka
 + send message to chat
++ listening telegram bot

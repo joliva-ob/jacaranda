@@ -22,11 +22,10 @@ func main() {
 
 	// Load configuration to start application
 	checkParams( os.Args )
-	var filename = os.Args[1] + "/" + os.Args[2] + ".yml"
+	var filename = os.Getenv("CONF_PATH") + "/" + os.Getenv("ENV") + ".yml"
 	config = LoadConfiguration(filename)
-	log = GetLog()
 	InitializeTelegramBot() // Create and initialize the bot
-	log.Infof("alertigo started with environment: %s and listening in port: %v\n", os.Args[2], config.Server_port)
+	log.Infof("jacaranda started with environment: %s and listening in port: %v\n", os.Args[2], config.Server_port)
 
 
 	// Starting server on given port number and listen for a chat conversation
@@ -39,10 +38,10 @@ func main() {
 
 	// Create the router to handle requests
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/alertigo/1.0/chats", ChatsController)
-	router.HandleFunc("/alertigo/1.0/sendMessage", SendMessagesController)
-	router.HandleFunc("/alertigo/1.0/info", InfoController)
-	router.HandleFunc("/alertigo/1.0/health", HealthController)
+	router.HandleFunc("/jacaranda/1.0/chats", ChatsController)
+	router.HandleFunc("/jacaranda/1.0/sendMessage", SendMessagesController)
+	router.HandleFunc("/jacaranda/1.0/info", InfoController)
+	router.HandleFunc("/jacaranda/1.0/health", HealthController)
 	log.Fatal( http.ListenAndServe(":" + config.Server_port, router) )
 
 }
@@ -54,12 +53,15 @@ func main() {
 // and provide specifications if needed.
 func  checkParams(  args []string ) {
 
-	if len(args) < 2 {
+	if os.Getenv("CONF_PATH") == "" || os.Getenv("ENV") == "" {
 
-		fmt.Println("ERROR: invalid arguments number!")
-		fmt.Println("Usage:")
-		fmt.Println("./alertigo [path-to-config-files] [environment]")
-		os.Exit(0)
+		if len(args) < 2 {
+
+			fmt.Println("ERROR: invalid parameters!")
+			fmt.Println("Usage:")
+			fmt.Println("./jacaranda [path-to-config-files] [environment] or set CONF_PATH set ENV")
+			os.Exit(0)
+		}
 	}
 
 }
