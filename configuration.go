@@ -12,22 +12,24 @@ import (
 
 // Global vars
 var config ConfigType
-var log = logging.MustGetLogger("alertigo")
+var log = logging.MustGetLogger("jacaranda")
 
 
 
 type RuleType struct{
 
-	Alert_name string
-	Elk_index string
-	Elk_name string
-	Elk_value string
-	Elk_usage string
-	Threashold int
-	Time_window int
-	Time_frame_sec int
-	Min_num_events int
-	Elk_filter string
+	Alert_name       string
+	Telegram_chat_id int64
+	Elk_index        string
+	Elk_name         string
+	Elk_value        string
+	Elk_usage        string
+	Threshold        float64
+	Raise_Condition  string
+	Time_window      string
+	Time_frame_sec   int64
+	Min_items   	 int
+	Elk_filter       string
 }
 
 

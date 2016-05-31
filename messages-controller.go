@@ -8,8 +8,6 @@ import (
 	"time"
 	"strconv"
 
-	"github.com/tucnak/telebot"
-
 )
 
 
@@ -45,9 +43,7 @@ func SendMessagesController(w http.ResponseWriter, request *http.Request) {
 	text = request.URL.Query().Get(TEXT)
 
 	// Send the message to the given chat id
-	var chat telebot.Chat
-	chat.ID = chatId
-	err = bot.SendMessage(chat, text, nil)
+	err = sendTelegramMessage( chatId, text )
 	if err != nil {
 		sentStatus = STATUS_ERROR
 	}

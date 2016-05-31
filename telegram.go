@@ -55,3 +55,16 @@ func ListenQueryChatMessages() {
 
 
 
+/*
+ Send a telegram message to the given chat Id
+ */
+func sendTelegramMessage( chatId int64, text string ) error {
+
+	var chat telebot.Chat
+	chat.ID = chatId
+	err := bot.SendMessage(chat, text, nil)
+
+	return err
+}
+
+

@@ -25,7 +25,7 @@ func main() {
 	var filename = os.Getenv("CONF_PATH") + "/" + os.Getenv("ENV") + ".yml"
 	config = LoadConfiguration(filename)
 	InitializeTelegramBot() // Create and initialize the bot
-	log.Infof("jacaranda started with environment: %s and listening in port: %v\n", os.Args[2], config.Server_port)
+	log.Infof("jacaranda started with environment: %s and listening in port: %v\n", os.Getenv("ENV"), config.Server_port)
 
 
 	// Starting server on given port number and listen for a chat conversation
