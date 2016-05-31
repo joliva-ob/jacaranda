@@ -206,3 +206,30 @@ gte: 1464640248741
 filter: { "query": { "filtered": { "query": { "query_string": { "query": "*", "analyze_wildcard": true } }, "filter": { "bool": { "must": [ { "bool": { "should": [ { "term": { "doc.metricKey.keys.method": "/onebox-rest2/rest/order/simpleCommitOrder" } }, { "term": { "doc.metricKey.keys.method": "/onebox-rest2/rest/order/commitOrder" } } ] } }, { "range": { "doc.timestamp": { "gte": 1464640248741, "lte": 1464700248741 } } } ] } } } }, "size": 0, "aggs": { "count": { "sum": { "field": "doc.count" } } } }
 [36m15:10:51.308 DEBU 006 ▶ watchdogRoutine: [0m Total hits: 25
 aggregations: {"count":{"value":27.0}}
+17:05:51.853 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+17:05:51.855 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+17:05:51.855 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: %v no-sales
+17:05:51.856 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: %v response-time
+17:05:51.856 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: host
+[36m17:05:51.856 DEBU 006 ▶ watchdogRoutine: [0m lte: 1464707151856 duration: 60000000 gte: 1464647151856 
+filter: { "query": { "filtered": { "query": { "query_string": { "query": "*", "analyze_wildcard": true } }, "filter": { "bool": { "must": [ { "bool": { "should": [ { "term": { "doc.metricKey.keys.method": "/onebox-rest2/rest/order/simpleCommitOrder" } }, { "term": { "doc.metricKey.keys.method": "/onebox-rest2/rest/order/commitOrder" } } ] } }, { "range": { "doc.timestamp": { "gte": 1464647151856, "lte": 1464707151856 } } } ] } } } }, "size": 0, "aggs": { "count": { "sum": { "field": "doc.count" } } } }
+17:21:59.978 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+17:21:59.979 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+17:21:59.979 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+17:21:59.980 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+17:21:59.980 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: host
+[36m17:21:59.980 DEBU 006 ▶ watchdogRoutine: [0m lte: 1464708119980 duration: 60000000 gte: 1464648119980 
+filter: { "query": { "filtered": { "query": { "query_string": { "query": "*", "analyze_wildcard": true } }, "filter": { "bool": { "must": [ { "bool": { "should": [ { "term": { "doc.metricKey.keys.method": "/onebox-rest2/rest/order/simpleCommitOrder" } }, { "term": { "doc.metricKey.keys.method": "/onebox-rest2/rest/order/commitOrder" } } ] } }, { "range": { "doc.timestamp": { "gte": 1464648119980, "lte": 1464708119980 } } } ] } } } }, "size": 0, "aggs": { "count": { "sum": { "field": "doc.count" } } } }
+17:21:59.980 INFO 007 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: host
+[36m17:21:59.980 DEBU 008 ▶ watchdogRoutine: [0m lte: 1464708119980 duration: 60000000 gte: 1464648119980 
+filter: { "query": { "filtered": { "query": { "query_string": { "query": "*", "analyze_wildcard": true } }, "filter": { "bool": { "must": [ { "range": { "doc.timestamp": { "gte": 1464648119980, "lte": 1464708119980 } } } ], "must_not": [] } } } }, "size": 0, "aggs": { "count": { "avg": { "field": "doc.duration" } } } }
+[36m17:22:00.189 DEBU 00a ▶ watchdogRoutine: [0m Total hits: 25 aggregations: {"count":{"value":27.0}}
+[36m17:22:00.189 DEBU 009 ▶ watchdogRoutine: [0m Total hits: 2466 aggregations: {"count":{"value":1766.742903487429}}
+17:22:00.498 INFO 00b ▶ evaluateResponse: [0m Alert: rule response-time is above than threshold 1500.000000
+[36m17:23:00.194 DEBU 00c ▶ watchdogRoutine: [0m lte: 1464708180194 duration: 60000000 gte: 1464648180194 
+filter: { "query": { "filtered": { "query": { "query_string": { "query": "*", "analyze_wildcard": true } }, "filter": { "bool": { "must": [ { "bool": { "should": [ { "term": { "doc.metricKey.keys.method": "/onebox-rest2/rest/order/simpleCommitOrder" } }, { "term": { "doc.metricKey.keys.method": "/onebox-rest2/rest/order/commitOrder" } } ] } }, { "range": { "doc.timestamp": { "gte": 1464648119980, "lte": 1464708119980 } } } ] } } } }, "size": 0, "aggs": { "count": { "sum": { "field": "doc.count" } } } }
+[36m17:23:00.246 DEBU 00d ▶ watchdogRoutine: [0m Total hits: 25 aggregations: {"count":{"value":27.0}}
+[36m17:23:00.498 DEBU 00e ▶ watchdogRoutine: [0m lte: 1464708180498 duration: 60000000 gte: 1464648180498 
+filter: { "query": { "filtered": { "query": { "query_string": { "query": "*", "analyze_wildcard": true } }, "filter": { "bool": { "must": [ { "range": { "doc.timestamp": { "gte": 1464648119980, "lte": 1464708119980 } } } ], "must_not": [] } } } }, "size": 0, "aggs": { "count": { "avg": { "field": "doc.duration" } } } }
+[36m17:23:00.571 DEBU 00f ▶ watchdogRoutine: [0m Total hits: 2466 aggregations: {"count":{"value":1766.742903487429}}
+17:23:00.650 INFO 010 ▶ evaluateResponse: [0m Alert: rule response-time is above than threshold 1500.000000

@@ -21,9 +21,7 @@ type RuleType struct{
 	Alert_name       string
 	Telegram_chat_id int64
 	Elk_index        string
-	Elk_name         string
-	Elk_value        string
-	Elk_usage        string
+	Elk_host	 string
 	Threshold        float64
 	Raise_Condition  string
 	Time_window      string

@@ -3,7 +3,6 @@ package main
 
 import (
 
-	"flag"
 	"encoding/json"
 	"time"
 	"strings"
@@ -46,7 +45,7 @@ func startAlertsWatchdogs() {
 		rule := config.Rules[i]
 		go watchdogRoutine( rule )
 
-		log.Info("Watchdog started for rule: %v", rule.Alert_name)
+		log.Infof("Watchdog started for rule: %v", rule.Alert_name)
 	}
 
 }
@@ -63,14 +62,13 @@ func startAlertsWatchdogs() {
 func watchdogRoutine( rule RuleType ) {
 
 	// Open connection to elasticsearch
-	elk_host := flag.String(rule.Elk_name, rule.Elk_value, rule.Elk_usage)
+	elk_host := rule.Elk_value
 	elk_conn = elastigo.NewConn()
-	flag.Parse()
-	elk_conn.Domain = *elk_host
+	elk_conn.Domain = elk_host
 	args := make(map[string]interface{})
-	args["size"] = 1 // the metric is forced to an absolute number
+	args["size"] = 1
 	args["from"] = 0
-	log.Infof("Watchdog [%s]--> Elasticsearch connected to host: %v", rule.Alert_name, rule.Elk_name)
+	log.Infof("Watchdog [%s]--> Elasticsearch connected to host: %v", rule.Alert_name, rule.Elk_host)
 
 
 	// TODO control goroutine life cycle by a channel and let the bot be able to handle it
@@ -83,12 +81,11 @@ func watchdogRoutine( rule RuleType ) {
 		gte := lte - duration
 		rule.Elk_filter = strings.Replace(rule.Elk_filter, "$lte", strconv.FormatInt(lte, 10), -1)
 		rule.Elk_filter = strings.Replace(rule.Elk_filter, "$gte", strconv.FormatInt(gte, 10), -1)
-		log.Debugf("lte: %v\nduration: %v\ngte: %v \nfilter: %v", lte, duration, gte, rule.Elk_filter)
 
 		out, err := elk_conn.Search(rule.Elk_index, "", args, rule.Elk_filter)
 		if out.Hits.Total >= rule.Min_items {
 
-			log.Debugf("Total hits: %v\naggregations: %v", out.Hits.Total, string(out.Aggregations))
+//			log.Debugf("Total hits: %v aggregations: %v", out.Hits.Total, string(out.Aggregations))
 			var res = new (ElkAggregationsResponse)
 			if err := json.Unmarshal(out.Aggregations, &res); err != nil {
 				log.Error(err)
@@ -130,12 +127,12 @@ func evaluateResponse( res *ElkAggregationsResponse, rule RuleType ) {
 		if res.Count.Value >= rule.Threshold {
 			isRaised = true
 		}
-
 	}
+
 
 	if isRaised {
 
-		alert_message := "Alert: rule " + rule.Alert_name + " is " + rule.Raise_Condition + " than threshold " + strconv.FormatFloat(rule.Threshold, 'f', 6, 64)
+		alert_message := "Alert: rule " + rule.Alert_name + " " + strconv.FormatFloat(res.Count.Value, 'f', 6, 64) + " is " + rule.Raise_Condition + " than threshold " + strconv.FormatFloat(rule.Threshold, 'f', 6, 64)
 		err := sendTelegramMessage( rule.Telegram_chat_id, alert_message )
 		if err != nil {
 			log.Error(err)
