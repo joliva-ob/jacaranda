@@ -233,3 +233,32 @@ filter: { "query": { "filtered": { "query": { "query_string": { "query": "*", "a
 filter: { "query": { "filtered": { "query": { "query_string": { "query": "*", "analyze_wildcard": true } }, "filter": { "bool": { "must": [ { "range": { "doc.timestamp": { "gte": 1464648119980, "lte": 1464708119980 } } } ], "must_not": [] } } } }, "size": 0, "aggs": { "count": { "avg": { "field": "doc.duration" } } } }
 [36m17:23:00.571 DEBU 00f ▶ watchdogRoutine: [0m Total hits: 2466 aggregations: {"count":{"value":1766.742903487429}}
 17:23:00.650 INFO 010 ▶ evaluateResponse: [0m Alert: rule response-time is above than threshold 1500.000000
+17:31:05.289 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+17:31:05.290 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+17:31:05.290 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+17:31:05.291 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+17:31:05.291 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+17:31:05.291 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+17:31:05.709 INFO 007 ▶ evaluateResponse: [0m Alert: rule response-time 1761.211950 is above than threshold 1500.000000
+18:13:30.515 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+18:13:30.518 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+18:13:30.518 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+18:13:30.518 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+18:13:30.518 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+18:13:30.519 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+[31m18:13:30.608 ERRO 007 ▶ processRule: [0m unexpected end of JSON input
+[31m18:13:30.608 ERRO 008 ▶ processRule: [0m [response-time] Error occurred while trying to retrieve elasticsearch data: Post http://pre.consolemonit1.oneboxtickets.com:9200/metric/monitoring/_search?from=0&size=1: dial tcp 10.1.133.193:9200: getsockopt: connection refused
+[36m18:13:30.608 DEBU 009 ▶ evaluateResponse: [0m count: 0 threshold: 1
+18:13:30.851 INFO 00a ▶ evaluateResponse: [0m Alert: rule no-sales 0.000000 is below than threshold 1.000000
+[31m18:13:30.851 ERRO 00b ▶ processRule: [0m [no-sales] Error occurred while trying to retrieve elasticsearch data: Post http://pre.consolemonit1.oneboxtickets.com:9200/metric/monitoring/_search?from=0&size=1: dial tcp 10.1.133.193:9200: getsockopt: connection refused
+[31m18:14:31.116 ERRO 00c ▶ processRule: [0m [response-time] Error occurred while trying to retrieve elasticsearch data: Post http://pre.consolemonit1.oneboxtickets.com:9200/metric/monitoring/_search?from=0&size=1: dial tcp 10.1.133.193:9200: getsockopt: connection refused
+[31m18:14:31.116 ERRO 00d ▶ processRule: [0m unexpected end of JSON input
+[36m18:14:31.116 DEBU 00e ▶ evaluateResponse: [0m count: 0 threshold: 1
+18:14:31.191 INFO 00f ▶ evaluateResponse: [0m Alert: rule no-sales 0.000000 is below than threshold 1.000000
+[31m18:14:31.191 ERRO 010 ▶ processRule: [0m [no-sales] Error occurred while trying to retrieve elasticsearch data: Post http://pre.consolemonit1.oneboxtickets.com:9200/metric/monitoring/_search?from=0&size=1: dial tcp 10.1.133.193:9200: getsockopt: connection refused
+18:17:08.839 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+18:17:08.840 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+18:17:08.841 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+18:17:08.841 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+18:17:08.841 INFO 005 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pro.consolemonit1.oneboxtickets.com
+18:17:08.842 INFO 006 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pro.consolemonit1.oneboxtickets.com

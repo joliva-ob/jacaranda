@@ -15,6 +15,7 @@ import (
 const (
 	BELOW  =  "below"
 	ABOVE  =  "above"
+	ENABLED = "enabled"
 )
 
 
@@ -43,7 +44,7 @@ func startAlertsWatchdogs() {
 	for i := 0; i<len(config.Rules); i++ {
 
 		rule := config.Rules[i]
-		go watchdogRoutine( rule )
+		go watchdogRoutine( &rule )
 
 		log.Infof("Watchdog started for rule: %v", rule.Alert_name)
 	}
@@ -59,43 +60,18 @@ func startAlertsWatchdogs() {
  as the aggregation to count an absolute number (aggregations.count)
  http://pre.consolemonit1.oneboxtickets.com:9200/_plugin/marvel/sense/index.html
  */
-func watchdogRoutine( rule RuleType ) {
+func watchdogRoutine( rule *RuleType ) {
 
-	// Open connection to elasticsearch
-	elk_host := rule.Elk_value
+	// Open connection to elasticsearch and keep it
+	elk_host := rule.Elk_host
 	elk_conn = elastigo.NewConn()
 	elk_conn.Domain = elk_host
-	args := make(map[string]interface{})
-	args["size"] = 1
-	args["from"] = 0
 	log.Infof("Watchdog [%s]--> Elasticsearch connected to host: %v", rule.Alert_name, rule.Elk_host)
 
-
-	// TODO control goroutine life cycle by a channel and let the bot be able to handle it
-	// TODO control time between two consecutive alertes, do not spamming!
 	for {
-
-		// retrieve data from index
-		lte := time.Now().UnixNano() / int64(time.Millisecond)
-		duration := int64(rule.Time_frame_sec) * int64(time.Millisecond)
-		gte := lte - duration
-		rule.Elk_filter = strings.Replace(rule.Elk_filter, "$lte", strconv.FormatInt(lte, 10), -1)
-		rule.Elk_filter = strings.Replace(rule.Elk_filter, "$gte", strconv.FormatInt(gte, 10), -1)
-
-		out, err := elk_conn.Search(rule.Elk_index, "", args, rule.Elk_filter)
-		if out.Hits.Total >= rule.Min_items {
-
-//			log.Debugf("Total hits: %v aggregations: %v", out.Hits.Total, string(out.Aggregations))
-			var res = new (ElkAggregationsResponse)
-			if err := json.Unmarshal(out.Aggregations, &res); err != nil {
-				log.Error(err)
-			}
-
-			evaluateResponse( res, rule )
-
-		}
-		if err != nil {
-			log.Errorf("[%v] Error occurred while trying to retrieve elasticsearch data: %v", rule.Alert_name, err)
+		switch rule.Alert_status {
+		case ENABLED:
+			processRule( rule, elk_conn )
 		}
 
 		// Check rule every N seconds
@@ -106,11 +82,48 @@ func watchdogRoutine( rule RuleType ) {
 
 
 
+/*
+ Generic process to get data from a metric and evaluate func init() {
+ on the rules defined by configuration.
+ }
+ */
+func  processRule( rule *RuleType, elk_conn *elastigo.Conn  )  {
+
+	// retrieve data from index
+	args := make(map[string]interface{})
+	args["size"] = 1
+	args["from"] = 0
+	lte := time.Now().UnixNano() / int64(time.Millisecond)
+	duration := int64(rule.Time_frame_sec) * int64(time.Millisecond)
+	gte := lte - duration
+	rule.Elk_filter = strings.Replace(rule.Elk_filter, "$lte", strconv.FormatInt(lte, 10), -1)
+	rule.Elk_filter = strings.Replace(rule.Elk_filter, "$gte", strconv.FormatInt(gte, 10), -1)
+
+	out, err := elk_conn.Search(rule.Elk_index, "", args, rule.Elk_filter)
+
+	if out.Hits.Total >= rule.Min_items {
+
+		//			log.Debugf("Total hits: %v aggregations: %v", out.Hits.Total, string(out.Aggregations))
+		var res = new (ElkAggregationsResponse)
+		if err := json.Unmarshal(out.Aggregations, &res); err != nil {
+			log.Error(err)
+		}
+
+		evaluateResponse( res, rule )
+
+	}
+	if err != nil {
+		log.Errorf("[%v] Error occurred while trying to retrieve elasticsearch data: %v", rule.Alert_name, err)
+	}
+
+}
+
+
 
 /*
  Evaluate the raise condition and send the message if needed.
  */
-func evaluateResponse( res *ElkAggregationsResponse, rule RuleType ) {
+func evaluateResponse( res *ElkAggregationsResponse, rule *RuleType ) {
 
 	isRaised := false
 

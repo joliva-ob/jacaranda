@@ -19,6 +19,7 @@ var log = logging.MustGetLogger("jacaranda")
 type RuleType struct{
 
 	Alert_name       string
+	Alert_status	 string
 	Telegram_chat_id int64
 	Elk_index        string
 	Elk_host	 string

@@ -16,7 +16,7 @@ Build Docker image with
 
 
 ## TODO list
-+ control the go routines over a channel to stop, start, reload config
++ control the go routines to stop, start and reload config
 + endpoint/bot command to reload alert rules from configuration file
 + check unit tests coverage
 + dockerization
