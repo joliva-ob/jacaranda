@@ -16,7 +16,8 @@ Build Docker image with
 
 
 ## TODO list
-+ control the go routines to stop, start and reload config
++ change sleep for ticker + channel
++ start/stop from endpoint/bot
 + endpoint/bot command to reload alert rules from configuration file
 + check unit tests coverage
 + dockerization
@@ -28,3 +29,4 @@ Build Docker image with
 + send message to chat
 + listening telegram bot
 + start alerts from configuration file
++ + control the go routines to stop, start from config
