@@ -4,6 +4,7 @@ package main
 import (
 
 	"time"
+	"strings"
 
 	"github.com/tucnak/telebot"
 
@@ -12,6 +13,14 @@ import (
 
 
 var bot *telebot.Bot
+
+const (
+	HELP = "/help"
+	START = "/start"
+	STOP = "/stop"
+	LIST = "/list"
+)
+
 
 
 /*
@@ -38,20 +47,64 @@ func InitializeTelegramBot() bool {
  */
 func ListenQueryChatMessages() {
 
-	messages := make(chan telebot.Message)
-	bot.Listen(messages, 1*time.Second)
+	messageChan := make(chan telebot.Message)
+	bot.Listen(messageChan, 1*time.Second)
 
-	for message := range messages {
 
-		if message.Text == "/hi" {
+	for {
+		select {
+		case message := <- messageChan:
+			processMessage( message )
+		}
+	}
 
-			bot.SendMessage(message.Chat, "Hello , " + message.Sender.FirstName + "!", nil)
-			log.Info("/hi requested from Chat ID: %v", message.Chat.ID)
+}
+
+
+
+/*
+ Processing the chat messages captured by the bot and
+ answer over the chat.
+ */
+func processMessage( message telebot.Message )  {
+
+	words := strings.Fields(message.Text)
+	var rule *RuleType
+
+	if len(words) > 0 {
+
+		if len(words) > 1 {
+			rule = GetAlert(words[1])
+		}
+
+		switch words[0] {
+		case HELP:
+			bot.SendMessage(message.Chat, "Bot commands available are:\n/help\n/list\n/start {alert_name}\n/stop {alert_name}", nil)
+			log.Info("/help requested from Chat ID: %v", message.Chat.ID)
+		case LIST:
+			alist := GetAlerts()
+			bot.SendMessage(message.Chat, "Alert rules available are:\n" + alist, nil)
+			log.Infof("/list requested from Chat ID: %v", message.Chat.ID)
+		case START:
+			err := ManageWatchdog(rule, START)
+			if err != nil {
+				log.Errorf(err.Error())
+			}
+			bot.SendMessage(message.Chat, "Alert " + rule.Alert_name + " is now " + rule.Alert_status, nil)
+			log.Infof("/start %v requested from Chat ID: %v is now %v", rule.Alert_name, message.Chat.ID, rule.Alert_status)
+		case STOP:
+			err := ManageWatchdog(rule, STOP)
+			if err != nil {
+				log.Errorf(err.Error())
+			}
+			bot.SendMessage(message.Chat, "Alert " + rule.Alert_name + " is now " + rule.Alert_status, nil)
+			log.Infof("/stop %v requested from Chat ID: %v is now %v", rule.Alert_name, message.Chat.ID, rule.Alert_status)
 		}
 
 	}
 
 }
+
 
 
 

@@ -262,3 +262,206 @@ filter: { "query": { "filtered": { "query": { "query_string": { "query": "*", "a
 18:17:08.841 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
 18:17:08.841 INFO 005 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pro.consolemonit1.oneboxtickets.com
 18:17:08.842 INFO 006 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pro.consolemonit1.oneboxtickets.com
+10:20:24.382 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:20:24.384 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:20:24.384 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:20:24.384 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:20:24.385 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:20:24.385 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+[36m10:20:34.703 DEBU 007 ▶ evaluateResponse: [0m count: 0 threshold: 1
+10:20:35.015 INFO 008 ▶ evaluateResponse: [0m Alert: rule no-sales 0.000000 is below than threshold 1.000000
+[36m10:20:44.453 DEBU 009 ▶ evaluateResponse: [0m count: 0 threshold: 1
+10:20:44.546 INFO 00a ▶ evaluateResponse: [0m Alert: rule no-sales 0.000000 is below than threshold 1.000000
+[36m10:20:54.543 DEBU 00b ▶ evaluateResponse: [0m count: 0 threshold: 1
+10:20:54.617 INFO 00c ▶ evaluateResponse: [0m Alert: rule no-sales 0.000000 is below than threshold 1.000000
+10:59:06.431 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:59:06.432 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:59:06.432 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:59:06.432 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:59:06.432 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:59:06.432 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:59:19.373 INFO 007 ▶ processMessage: [0m /hi requested from Chat ID: %v 146665083
+15:55:46.134 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+15:55:46.136 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+15:55:46.136 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+15:55:46.137 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+15:55:46.137 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+15:55:46.137 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+15:56:32.131 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+15:56:32.132 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+15:56:32.132 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+15:56:32.132 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+15:56:32.132 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+15:56:32.132 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+[36m16:03:51.152 DEBU 007 ▶ processMessage: [0m word[1]:  /hi
+18:43:43.588 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+18:43:43.589 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+18:43:43.589 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+18:43:43.589 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+18:43:43.589 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+18:43:43.590 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+18:43:55.368 INFO 007 ▶ processMessage: [0m /help requested from Chat ID: %v 146665083
+19:59:33.306 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+19:59:33.311 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+19:59:33.311 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+19:59:33.311 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+19:59:33.312 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+19:59:33.312 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+20:02:14.168 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+20:02:14.169 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+20:02:14.169 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+20:02:14.169 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+20:02:14.169 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+20:02:14.169 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+20:03:26.790 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+20:03:26.790 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+20:03:26.790 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+20:03:26.790 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+20:03:26.791 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+20:03:26.791 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+20:04:38.921 INFO 007 ▶ processMessage: [0m /help requested from Chat ID: %v 146665083
+20:04:51.117 INFO 008 ▶ processMessage: [0m /list requested from Chat ID: %v 146665083
+20:04:55.468 INFO 009 ▶ processMessage: [0m /start requested from Chat ID: %v 146665083
+[31m20:04:56.800 ERRO 00a ▶ processRule: [0m [response-time] Error occurred while trying to retrieve elasticsearch data: Post http://pre.consolemonit1.oneboxtickets.com:9200/metric/monitoring/_search?from=0&size=1: dial tcp 10.1.133.193:9200: i/o timeout
+[31m20:04:56.800 ERRO 00b ▶ processRule: [0m unexpected end of JSON input
+20:04:56.873 INFO 00c ▶ evaluateResponse: [0m Alert: rule no-sales 0.000000 is below than threshold 1.000000
+[31m20:04:56.873 ERRO 00d ▶ processRule: [0m [no-sales] Error occurred while trying to retrieve elasticsearch data: Post http://pre.consolemonit1.oneboxtickets.com:9200/metric/monitoring/_search?from=0&size=1: dial tcp 10.1.133.193:9200: i/o timeout
+20:05:15.055 INFO 00e ▶ processMessage: [0m /stop requested from Chat ID: %v 146665083
+[31m20:05:56.794 ERRO 00f ▶ processRule: [0m [response-time] Error occurred while trying to retrieve elasticsearch data: Post http://pre.consolemonit1.oneboxtickets.com:9200/metric/monitoring/_search?from=0&size=1: dial tcp 10.1.133.193:9200: i/o timeout
+[31m20:05:56.794 ERRO 010 ▶ processRule: [0m unexpected end of JSON input
+20:05:56.879 INFO 011 ▶ evaluateResponse: [0m Alert: rule no-sales 0.000000 is below than threshold 1.000000
+[31m20:05:56.879 ERRO 012 ▶ processRule: [0m [no-sales] Error occurred while trying to retrieve elasticsearch data: Post http://pre.consolemonit1.oneboxtickets.com:9200/metric/monitoring/_search?from=0&size=1: dial tcp 10.1.133.193:9200: i/o timeout
+20:06:33.052 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+20:06:33.053 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+20:06:33.053 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+20:06:33.053 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+20:06:33.054 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+20:06:33.054 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+20:06:46.797 INFO 007 ▶ processMessage: [0m /list requested from Chat ID: %v 146665083
+20:06:49.867 INFO 008 ▶ processMessage: [0m /help requested from Chat ID: %v 146665083
+20:29:33.626 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+20:29:33.627 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+20:29:33.627 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+20:29:33.627 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+20:29:33.627 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+20:29:33.628 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+20:29:39.467 INFO 007 ▶ processMessage: [0m /list requested from Chat ID: %v 146665083
+10:25:06.780 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:25:06.783 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:25:06.783 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:25:06.783 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:25:06.783 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:25:06.784 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:25:56.923 INFO 007 ▶ processMessage: [0m /list requested from Chat ID: %v 146665083
+10:26:07.087 INFO 008 ▶ evaluateResponse: [0m Alert: rule response-time 1064.419295 is above than threshold 100.000000
+10:27:06.961 INFO 009 ▶ evaluateResponse: [0m Alert: rule response-time 1064.419295 is above than threshold 100.000000
+10:29:16.292 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:29:16.292 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:29:16.292 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:29:16.292 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:29:16.292 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:29:16.292 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:32:01.486 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:32:01.486 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:32:01.486 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:32:01.487 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:32:01.487 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:32:01.487 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:32:14.892 INFO 007 ▶ processMessage: [0m /list requested from Chat ID: 146665083
+10:35:45.496 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:35:45.496 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:35:45.496 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:35:45.496 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:35:45.496 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:35:45.497 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:36:00.576 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:36:00.576 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:36:00.576 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:36:00.576 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:36:00.576 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:36:00.576 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:36:11.267 INFO 007 ▶ processMessage: [0m /help requested from Chat ID: %v 146665083
+10:36:13.146 INFO 008 ▶ processMessage: [0m /list requested from Chat ID: 146665083
+10:37:31.007 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:37:31.007 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:37:31.007 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:37:31.007 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:37:31.008 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:37:31.008 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:38:30.278 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:38:30.279 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:38:30.279 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:38:30.279 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:38:30.279 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:38:30.279 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:38:35.131 INFO 007 ▶ processMessage: [0m /stop no-sales requested from Chat ID: 146665083
+10:38:57.191 INFO 008 ▶ processMessage: [0m /stop response-time requested from Chat ID: 146665083
+10:39:31.592 INFO 009 ▶ evaluateResponse: [0m Alert: rule response-time 1064.805457 is above than threshold 100.000000
+10:43:56.494 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:43:56.494 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:43:56.495 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:43:56.495 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:43:56.495 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:43:56.495 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:44:04.927 INFO 007 ▶ processMessage: [0m /list requested from Chat ID: 146665083
+10:44:15.620 INFO 008 ▶ processMessage: [0m /help requested from Chat ID: %v 146665083
+10:44:57.164 INFO 009 ▶ evaluateResponse: [0m Alert: rule response-time 1064.805457 is above than threshold 100.000000
+10:45:08.672 INFO 00a ▶ processMessage: [0m /stop response-time requested from Chat ID: 146665083 is now disabled
+10:45:12.232 INFO 00b ▶ processMessage: [0m /list requested from Chat ID: 146665083
+10:45:56.871 INFO 00c ▶ evaluateResponse: [0m Alert: rule response-time 1064.525496 is above than threshold 100.000000
+10:47:48.985 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:47:48.985 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:47:48.985 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:47:48.985 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:47:48.985 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:47:48.985 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:48:49.265 INFO 007 ▶ evaluateResponse: [0m Alert: rule response-time 1064.525496 is above than threshold 100.000000
+10:49:49.233 INFO 008 ▶ evaluateResponse: [0m Alert: rule response-time 1064.525496 is above than threshold 100.000000
+10:49:56.035 INFO 009 ▶ processMessage: [0m /help requested from Chat ID: %v 146665083
+10:49:57.966 INFO 00a ▶ processMessage: [0m /list requested from Chat ID: 146665083
+10:50:10.083 INFO 00b ▶ processMessage: [0m /stop response-time requested from Chat ID: 146665083 is now disabled
+10:50:48.560 INFO 00c ▶ processMessage: [0m /list requested from Chat ID: 146665083
+10:50:49.116 INFO 00d ▶ evaluateResponse: [0m Alert: rule response-time 1064.525496 is above than threshold 100.000000
+10:51:49.192 INFO 00e ▶ evaluateResponse: [0m Alert: rule response-time 1064.525496 is above than threshold 100.000000
+10:52:55.333 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:52:55.333 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:52:55.333 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:52:55.333 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:52:55.333 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:52:55.334 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:53:05.022 INFO 007 ▶ processMessage: [0m /list requested from Chat ID: 146665083
+10:53:10.433 INFO 008 ▶ processMessage: [0m /stop response-time requested from Chat ID: 146665083 is now disabled
+10:53:12.804 INFO 009 ▶ processMessage: [0m /list requested from Chat ID: 146665083
+10:53:56.570 INFO 00a ▶ evaluateResponse: [0m Alert: rule response-time 1065.192751 is above than threshold 100.000000
+10:54:55.644 INFO 00b ▶ evaluateResponse: [0m Alert: rule response-time 1063.450042 is above than threshold 100.000000
+10:56:06.857 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:56:06.857 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:56:06.857 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:56:06.857 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:56:06.857 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:56:06.857 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:56:24.521 INFO 007 ▶ processMessage: [0m /list requested from Chat ID: 146665083
+10:56:27.886 INFO 008 ▶ processMessage: [0m /stop response-time requested from Chat ID: 146665083 is now disabled
+[36m10:57:06.861 DEBU 00a ▶ watchdogRoutine: [0m alert status: enabled + isTimeWindow: true
+[36m10:57:06.861 DEBU 009 ▶ watchdogRoutine: [0m alert status: enabled + isTimeWindow: true
+10:57:07.050 INFO 00b ▶ evaluateResponse: [0m Alert: rule response-time 1063.450042 is above than threshold 100.000000
+10:58:05.926 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+10:58:05.926 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+10:58:05.926 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+10:58:05.926 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+10:58:05.926 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+10:58:05.927 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+[36m10:59:05.932 DEBU 008 ▶ watchdogRoutine: [0m alert response-time status: enabled + isTimeWindow: true
+[36m10:59:05.932 DEBU 007 ▶ watchdogRoutine: [0m alert no-sales status: enabled + isTimeWindow: true
+10:59:07.397 INFO 009 ▶ evaluateResponse: [0m Alert: rule response-time 1063.450042 is above than threshold 100.000000
+11:00:56.468 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 182636765:AAFHu8FhAK1KPgad3hfqov8JNgqIZvWzLF0
+11:00:56.469 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+11:00:56.469 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+11:00:56.469 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+11:00:56.469 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+11:00:56.469 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+11:01:05.448 INFO 007 ▶ processMessage: [0m /list requested from Chat ID: 146665083
+11:01:10.430 INFO 008 ▶ processMessage: [0m /stop response-time requested from Chat ID: 146665083 is now disabled
+11:01:13.135 INFO 009 ▶ processMessage: [0m /list requested from Chat ID: 146665083
+[36m11:01:56.474 DEBU 00a ▶ watchdogRoutine: [0m alert no-sales status: enabled + isTimeWindow: true
+[36m11:01:56.474 DEBU 00b ▶ watchdogRoutine: [0m alert response-time status: disabled + isTimeWindow: true

@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"os"
 	"fmt"
+	"bytes"
 
 	"gopkg.in/yaml.v2"
 	"github.com/op/go-logging"
@@ -13,6 +14,8 @@ import (
 // Global vars
 var config ConfigType
 var log = logging.MustGetLogger("jacaranda")
+var alertsMap map[string] *RuleType
+var alertsList string
 
 
 
@@ -27,6 +30,7 @@ type RuleType struct{
 	Raise_Condition  string
 	Time_window      string
 	Time_frame_sec   int64
+	Check_time_sec	 int64
 	Min_items   	 int
 	Elk_filter       string
 }
@@ -42,7 +46,7 @@ type ConfigType struct {
 	Eureka_ip_addr string
 	Eureka_app_name string
 	Telegram_bot_token string
-	Rules [] RuleType
+	Rules[] RuleType
 }
 
 
@@ -78,4 +82,41 @@ func LoadConfiguration(filename string) ConfigType {
 	logging.SetBackend(logbackend1Formatted, logbackend2Formatted)
 
 	return config
+}
+
+
+
+
+func GetAlerts() string {
+
+	var buffer bytes.Buffer
+
+	for i := 0; i<len(config.Rules); i++ {
+
+		buffer.WriteString(config.Rules[i].Alert_name)
+		buffer.WriteString(" - ")
+		buffer.WriteString(config.Rules[i].Alert_status)
+		buffer.WriteString("\n")
+	}
+
+	return buffer.String()
+}
+
+
+
+
+func GetAlert( alertName string ) *RuleType {
+
+	if len(alertsMap) == 0 {
+
+		alertsMap = make(map[string] *RuleType)
+
+		for i := 0; i<len(config.Rules); i++ {
+			alertsMap[config.Rules[i].Alert_name] = &config.Rules[i]
+		}
+
+	}
+
+	return alertsMap[alertName]
+
 }

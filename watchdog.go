@@ -10,12 +10,14 @@ import (
 
 	"github.com/mattbaird/elastigo/lib"
 
+	"errors"
 )
 
 const (
 	BELOW  =  "below"
 	ABOVE  =  "above"
 	ENABLED = "enabled"
+	DISABLED = "disabled"
 )
 
 
@@ -24,7 +26,6 @@ var (
 	elk_conn *elastigo.Conn
 
 )
-
 
 
 type ElkAggregationsResponse struct {
@@ -43,12 +44,32 @@ func startAlertsWatchdogs() {
 
 	for i := 0; i<len(config.Rules); i++ {
 
-		rule := config.Rules[i]
-		go watchdogRoutine( &rule )
+		go watchdogRoutine( &config.Rules[i] )
 
-		log.Infof("Watchdog started for rule: %v", rule.Alert_name)
+		log.Infof("Watchdog started for rule: %v", (config.Rules[i]).Alert_name)
 	}
 
+}
+
+
+
+/*
+ Change status from a given alert rule
+ */
+func ManageWatchdog( rule *RuleType, action string ) error {
+
+	if rule != nil {
+		switch action {
+		case START:
+			rule.Alert_status = ENABLED
+		case STOP:
+			rule.Alert_status = DISABLED
+		}
+	} else {
+		return errors.New("Error starting rule, does not exist.")
+	}
+
+	return nil
 }
 
 
@@ -66,19 +87,39 @@ func watchdogRoutine( rule *RuleType ) {
 	elk_host := rule.Elk_host
 	elk_conn = elastigo.NewConn()
 	elk_conn.Domain = elk_host
+	ticker := time.Tick(time.Duration(rule.Check_time_sec * 1000) * time.Millisecond)
 	log.Infof("Watchdog [%s]--> Elasticsearch connected to host: %v", rule.Alert_name, rule.Elk_host)
 
 	for {
-		switch rule.Alert_status {
-		case ENABLED:
-			processRule( rule, elk_conn )
+		select {
+		case <- ticker:
+			if rule.Alert_status == ENABLED && isTimeWindow(rule.Time_window) {
+				processRule( rule, elk_conn )
+			}
 		}
-
-		// Check rule every N seconds
-		time.Sleep(time.Duration(rule.Time_frame_sec * 1000) * time.Millisecond)
 	}
 
 }
+
+
+
+
+func isTimeWindow( timeWindow string ) bool {
+
+	isBetween := false
+
+	now := time.Now()
+	s := strings.Split(timeWindow, "-")
+	from, _ := strconv.Atoi(s[0])
+	to, _ := strconv.Atoi(s[1])
+
+	if from <= now.Hour() && now.Hour() <= to {
+		isBetween = true
+	}
+
+	return isBetween
+}
+
 
 
 
@@ -103,7 +144,6 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn  )  {
 
 	if out.Hits.Total >= rule.Min_items {
 
-		//			log.Debugf("Total hits: %v aggregations: %v", out.Hits.Total, string(out.Aggregations))
 		var res = new (ElkAggregationsResponse)
 		if err := json.Unmarshal(out.Aggregations, &res); err != nil {
 			log.Error(err)
@@ -128,18 +168,16 @@ func evaluateResponse( res *ElkAggregationsResponse, rule *RuleType ) {
 	isRaised := false
 
 
-	if rule.Raise_Condition == BELOW {
-
+	switch rule.Raise_Condition {
+	case BELOW:
 		if res.Count.Value < rule.Threshold {
-			log.Debugf("count: %v threshold: %v", res.Count.Value, rule.Threshold)
 			isRaised = true
 		}
-
-	} else if rule.Raise_Condition == ABOVE {
-
+	case ABOVE:
 		if res.Count.Value >= rule.Threshold {
 			isRaised = true
 		}
+
 	}
 
 
