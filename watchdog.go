@@ -134,14 +134,17 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn  )  {
 	args := make(map[string]interface{})
 	args["size"] = 1
 	args["from"] = 0
-	lte := time.Now().UnixNano() / int64(time.Millisecond)
-	duration := int64(rule.Time_frame_sec) * int64(time.Millisecond)
+	lte := time.Now().UnixNano() / (int64(time.Millisecond)/int64(time.Nanosecond))
+	duration := int64(rule.Time_frame_sec) * 1000
 	gte := lte - duration
 	rule.Elk_filter = strings.Replace(rule.Elk_filter, "$lte", strconv.FormatInt(lte, 10), -1)
 	rule.Elk_filter = strings.Replace(rule.Elk_filter, "$gte", strconv.FormatInt(gte, 10), -1)
+//	log.Debugf("duration in millis: %v", duration)
+//	log.Debugf("RuleName: %v --> gte: %v lte: %v query: ", rule.Alert_name, strconv.FormatInt(gte, 10), strconv.FormatInt(lte, 10), rule.Elk_filter)
 
+	// Query elasticsearch
 	out, err := elk_conn.Search(rule.Elk_index, "", args, rule.Elk_filter)
-
+	log.Debugf("RuleName: %v --> out: %v", rule.Alert_name, out.String(), string(out.RawJSON[:]))
 	if out.Hits.Total >= rule.Min_items {
 
 		var res = new (ElkAggregationsResponse)
@@ -189,7 +192,7 @@ func evaluateResponse( res *ElkAggregationsResponse, rule *RuleType ) {
 			log.Error(err)
 		}
 
-		log.Info(alert_message)
+		log.Warning(alert_message)
 	}
 
 }

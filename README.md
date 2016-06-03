@@ -13,11 +13,14 @@ Build Docker image with
 + docker build -f docker/Dockerfile . -tag jacaranda 
 + docker run --publish 8000:8000 --name jacaranda --rm jacaranda --restart=always jacaranda 
 
+Kubernetes
++ docker build --file=Dockerfile -t docker-registry.oneboxtickets.com/oneboxtm/jacaranda .
++ docker push docker-registry.oneboxtickets.com/oneboxtm/jacaranda
+
 
 
 ## TODO list
 + check unit tests coverage
-+ dockerization
 
 
 
@@ -30,3 +33,4 @@ Build Docker image with
 + change sleep for ticker + channel
 + only process alert between time_window config
 + start/stop from endpoint/bot
++ dockerization
