@@ -86,19 +86,9 @@ func processMessage( message telebot.Message )  {
 			bot.SendMessage(message.Chat, "Alert rules available are:\n" + alist, nil)
 			log.Infof("/list requested from Chat ID: %v", message.Chat.ID)
 		case START:
-			err := ManageWatchdog(rule, START)
-			if err != nil {
-				log.Errorf(err.Error())
-			}
-			bot.SendMessage(message.Chat, "Alert " + rule.Alert_name + " is now " + rule.Alert_status, nil)
-			log.Infof("/start %v requested from Chat ID: %v is now %v", rule.Alert_name, message.Chat.ID, rule.Alert_status)
+			processAndNotifyWatchdogChange(message, rule, START)
 		case STOP:
-			err := ManageWatchdog(rule, STOP)
-			if err != nil {
-				log.Errorf(err.Error())
-			}
-			bot.SendMessage(message.Chat, "Alert " + rule.Alert_name + " is now " + rule.Alert_status, nil)
-			log.Infof("/stop %v requested from Chat ID: %v is now %v", rule.Alert_name, message.Chat.ID, rule.Alert_status)
+			processAndNotifyWatchdogChange(message, rule, STOP)
 		}
 
 	}

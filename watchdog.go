@@ -7,10 +7,10 @@ import (
 	"time"
 	"strings"
 	"strconv"
+	"errors"
 
 	"github.com/mattbaird/elastigo/lib"
-
-	"errors"
+	"github.com/tucnak/telebot"
 )
 
 const (
@@ -56,16 +56,22 @@ func startAlertsWatchdogs() {
 /*
  Change status from a given alert rule
  */
-func ManageWatchdog( rule *RuleType, action string ) error {
+func processAndNotifyWatchdogChange( message telebot.Message, rule *RuleType, action string ) error {
 
 	if rule != nil {
+
 		switch action {
 		case START:
 			rule.Alert_status = ENABLED
 		case STOP:
 			rule.Alert_status = DISABLED
 		}
+
+		bot.SendMessage(message.Chat, "Alert " + rule.Alert_name + " is now " + rule.Alert_status, nil)
+		log.Infof("/%v %v requested from Chat ID: %v is now %v", action, rule.Alert_name, message.Chat.ID, rule.Alert_status)
+
 	} else {
+		bot.SendMessage(message.Chat, "Error starting rule, does not exist.", nil)
 		return errors.New("Error starting rule, does not exist.")
 	}
 

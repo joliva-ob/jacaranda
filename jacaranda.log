@@ -509,3 +509,22 @@ query: %!(EXTRA string={ "query": { "filtered": { "query": { "query_string": { "
 17:37:51.393 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
 17:37:51.512 INFO 007 ▶ processMessage: [0m /help requested from Chat ID: %v 146665083
 [31m17:37:58.642 ERRO 008 ▶ processMessage: [0m Error starting rule, does not exist.
+18:05:55.371 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 238639631:AAH9Nue1PNCSSfOlTnj8K5KyzsH_lG0UJKk
+18:05:55.378 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+18:05:55.379 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+18:05:55.379 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+18:05:55.379 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+18:05:55.379 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+18:06:03.852 INFO 007 ▶ processMessage: [0m /list requested from Chat ID: 146665083
+18:06:25.089 INFO 008 ▶ processMessage: [0m /list requested from Chat ID: 146665083
+18:07:05.657 INFO 001 ▶ InitializeTelegramBot: [0m Telegram Bot initialized with token: 238639631:AAH9Nue1PNCSSfOlTnj8K5KyzsH_lG0UJKk
+18:07:05.657 INFO 002 ▶ main: [0m jacaranda started with environment: dev-joan and listening in port: 8000
+18:07:05.657 INFO 003 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: no-sales
+18:07:05.657 INFO 004 ▶ startAlertsWatchdogs: [0m Watchdog started for rule: response-time
+18:07:05.658 INFO 005 ▶ watchdogRoutine: [0m Watchdog [no-sales]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+18:07:05.658 INFO 006 ▶ watchdogRoutine: [0m Watchdog [response-time]--> Elasticsearch connected to host: pre.consolemonit1.oneboxtickets.com
+18:07:16.055 INFO 007 ▶ processMessage: [0m /list requested from Chat ID: 146665083
+18:07:27.180 INFO 008 ▶ ManageWatchdog: [0m //stop no-sales requested from Chat ID: 146665083 is now disabled
+18:07:29.960 INFO 009 ▶ processMessage: [0m /list requested from Chat ID: 146665083
+18:07:34.390 INFO 00a ▶ ManageWatchdog: [0m //start no-sales requested from Chat ID: 146665083 is now enabled
+18:07:36.071 INFO 00b ▶ processMessage: [0m /list requested from Chat ID: 146665083
