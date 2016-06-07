@@ -75,7 +75,9 @@
       <root url="file://$PROJECT_DIR$/../elastic-go-test/.git" />
       <root url="file://$PROJECT_DIR$/../../gorilla/mux/.git" />
       <root url="file://$PROJECT_DIR$/../elastic-go-test/.idea" />
+      <root url="file://$PROJECT_DIR$/../../stretchr/testify/_codegen" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/go/ssa/interp/testdata" />
+      <root url="file://$PROJECT_DIR$/../../stretchr/testify/.git" />
       <root url="file://$PROJECT_DIR$/../../gorilla/context/.git" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/go/ssa/ssautil/testdata" />
       <root url="file://$PROJECT_DIR$/../../kr/text/.git" />

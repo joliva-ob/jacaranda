@@ -139,12 +139,11 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn  )  {
 	gte := lte - duration
 	rule.Elk_filter = strings.Replace(rule.Elk_filter, "$lte", strconv.FormatInt(lte, 10), -1)
 	rule.Elk_filter = strings.Replace(rule.Elk_filter, "$gte", strconv.FormatInt(gte, 10), -1)
-//	log.Debugf("duration in millis: %v", duration)
 //	log.Debugf("RuleName: %v --> gte: %v lte: %v query: ", rule.Alert_name, strconv.FormatInt(gte, 10), strconv.FormatInt(lte, 10), rule.Elk_filter)
 
 	// Query elasticsearch
 	out, err := elk_conn.Search(rule.Elk_index, "", args, rule.Elk_filter)
-	log.Debugf("RuleName: %v --> out: %v", rule.Alert_name, out.String(), string(out.RawJSON[:]))
+//	log.Debugf("RuleName: %v --> out: %v", rule.Alert_name, out.String(), string(out.RawJSON[:]))
 	if out.Hits.Total >= rule.Min_items {
 
 		var res = new (ElkAggregationsResponse)

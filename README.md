@@ -3,10 +3,14 @@ Golang alerting api for Telegram messaging, tho goal is to have a chat where one
 Hence, this bot will be able to send alert messages to the group and also be able to be listening the conversation 
 in order to answer some technical questions. (ie: /status, and anything starting by a slash).
 
+
+Run unit tests
++ go test
+
 Compiled with runtime with: 
-+ GOOS=windows GOARCH=386 go build -o jacaranda.exe jacaranda.go
-+ GOOS=linux GOARCH=386 go build -o jacaranda.linux jacaranda.go
-+ GOOS=darwin GOARCH=386 go build -o jacaranda jacaranda.go
++ GOOS=windows GOARCH=386 go build -o jacaranda.exe
++ GOOS=linux GOARCH=386 go build -o jacaranda.linux
++ GOOS=darwin GOARCH=386 go build -o jacaranda
 
 Build Docker image with
 + cp /source_cfg_files/*env* .

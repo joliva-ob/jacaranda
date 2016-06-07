@@ -59,7 +59,7 @@ func  checkParams(  args []string ) {
 
 			fmt.Println("ERROR: invalid parameters!")
 			fmt.Println("Usage:")
-			fmt.Println("./jacaranda [path-to-config-files] [environment] or set CONF_PATH set ENV")
+			fmt.Println("./jacaranda [path-to-config-files] [environment] or export CONF_PATH export ENV")
 			os.Exit(0)
 		}
 	}
