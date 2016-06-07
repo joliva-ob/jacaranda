@@ -24,8 +24,6 @@ Kubernetes
 
 
 ## TODO list
-+ check unit tests coverage
-
 
 
 ## DONE list
@@ -38,3 +36,4 @@ Kubernetes
 + only process alert between time_window config
 + start/stop from endpoint/bot
 + dockerization
++ check unit tests coverage
