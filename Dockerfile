@@ -14,6 +14,6 @@ RUN mkdir /jacaranda/logs
 ADD *.yml /jacaranda/cfg/
 
 ENV CONF_PATH /jacaranda/cfg
-ENV ENV pre
+ENV ENV pro
 
-EXPOSE 8000
+EXPOSE 8001

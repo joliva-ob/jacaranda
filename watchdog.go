@@ -67,10 +67,12 @@ func processAndNotifyWatchdogChange( message telebot.Message, rule *RuleType, ac
 			rule.Alert_status = DISABLED
 		}
 
+		// OK message
 		bot.SendMessage(message.Chat, "Alert " + rule.Alert_name + " is now " + rule.Alert_status, nil)
 		log.Infof("/%v %v requested from Chat ID: %v is now %v", action, rule.Alert_name, message.Chat.ID, rule.Alert_status)
 
 	} else {
+		// ERROR message
 		bot.SendMessage(message.Chat, "Error starting rule, does not exist.", nil)
 		return errors.New("Error starting rule, does not exist.")
 	}

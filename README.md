@@ -1,5 +1,5 @@
 # jacaranda 
-Golang alerting api for Telegram messaging, tho goal is to have a chat where one of the guests will be a bot.
+Golang alert api for Telegram messaging over elasticsearch index metrics exposed to kibana, tho goal is to have a chat where one of the guests will be a bot.
 Hence, this bot will be able to send alert messages to the group and also be able to be listening the conversation 
 in order to answer some technical questions. (ie: /status, and anything starting by a slash).
 
