@@ -18,8 +18,8 @@ Build Docker image with
 + docker run --publish 8000:8000 --name jacaranda --rm jacaranda --restart=always jacaranda 
 
 Kubernetes
-+ docker build --file=Dockerfile -t docker-registry.oneboxtickets.com/oneboxtm/jacaranda .
-+ docker push docker-registry.oneboxtickets.com/oneboxtm/jacaranda
++ docker build --file=Dockerfile -t hub.docker.com/r/joanoj/golang/jacaranda .
++ docker push hub.docker.com/r/joanoj/golang/jacaranda
 
 
 
