@@ -28,11 +28,14 @@ var (
 )
 
 
+
 type ElkAggregationsResponse struct {
+
 	Count struct {
 		      Value float64 `json:"value"`
 	      } `json:"count"`
 }
+
 
 
 /*
@@ -89,6 +92,8 @@ func processAndNotifyWatchdogChange( message telebot.Message, rule *RuleType, ac
  as the aggregation to count an absolute number (aggregations.count)
  http://pre.consolemonit1.oneboxtickets.com:9200/_plugin/marvel/sense/index.html
  */
+// TODO passar per parametre el Ticker d'espera més un ticker de auto-restart,
+// TODO previament registrats a un map per accedir directament al channel i reprogramar-los
 func watchdogRoutine( rule *RuleType ) {
 
 	// Open connection to elasticsearch and keep it
@@ -145,20 +150,22 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn  )  {
 	lte := time.Now().UnixNano() / (int64(time.Millisecond)/int64(time.Nanosecond))
 	duration := int64(rule.Time_frame_sec) * 1000
 	gte := lte - duration
-	rule.Elk_filter = strings.Replace(rule.Elk_filter, "$lte", strconv.FormatInt(lte, 10), -1)
-	rule.Elk_filter = strings.Replace(rule.Elk_filter, "$gte", strconv.FormatInt(gte, 10), -1)
-//	log.Debugf("RuleName: %v --> gte: %v lte: %v query: ", rule.Alert_name, strconv.FormatInt(gte, 10), strconv.FormatInt(lte, 10), rule.Elk_filter)
+	query := rule.Elk_filter
+	query = strings.Replace(query, "$lte", strconv.FormatInt(lte, 10), -1)
+	query = strings.Replace(query, "$gte", strconv.FormatInt(gte, 10), -1)
+//	log.Debugf("RuleName: %v --> gte: %v lte: %v query: ", rule.Alert_name, strconv.FormatInt(gte, 10), strconv.FormatInt(lte, 10), query)
 
 	// Query elasticsearch
-	out, err := elk_conn.Search(rule.Elk_index, "", args, rule.Elk_filter)
-//	log.Debugf("RuleName: %v --> out: %v", rule.Alert_name, out.String(), string(out.RawJSON[:]))
+	out, err := elk_conn.Search(rule.Elk_index, "", args, query)
+
 	if out.Hits.Total >= rule.Min_items {
 
-		var res = new (ElkAggregationsResponse)
+		res := new (ElkAggregationsResponse)
 		if err := json.Unmarshal(out.Aggregations, &res); err != nil {
 			log.Error(err)
 		}
 
+//		log.Debugf("RuleName: %v --> out: %v res addr: %v out addr: %v", rule.Alert_name, res.Count.Value, &res, &out)
 		evaluateResponse( res, rule )
 
 	}
