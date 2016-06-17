@@ -106,7 +106,7 @@ func watchdogRoutine( rule *RuleType ) {
 	for {
 		select {
 		case <- ticker:
-			if rule.Alert_status == ENABLED && isTimeWindow(rule.Time_window) {
+			if rule.Alert_status == ENABLED && isTimeWindow(rule.Time_window_utc) {
 				processRule( rule, elk_conn )
 			}
 		}

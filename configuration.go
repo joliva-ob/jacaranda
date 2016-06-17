@@ -28,7 +28,7 @@ type RuleType struct{
 	Elk_host	 string
 	Threshold        float64
 	Raise_Condition  string
-	Time_window      string
+	Time_window_utc  string
 	Time_frame_sec   int64
 	Check_time_sec	 int64
 	Min_items   	 int
