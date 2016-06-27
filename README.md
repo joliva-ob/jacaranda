@@ -25,6 +25,7 @@ Kubernetes
 
 ## TODO list
 + re-start an alert previously disabled manually after 24 hour.
++ use docker templates
 
 
 ## DONE list

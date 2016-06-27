@@ -5,6 +5,7 @@ import (
 	"os"
 	"fmt"
 	"bytes"
+	"bufio"
 
 	"gopkg.in/yaml.v2"
 	"github.com/op/go-logging"
@@ -15,7 +16,6 @@ import (
 var config ConfigType
 var log = logging.MustGetLogger("jacaranda")
 var alertsMap map[string] *RuleType
-var alertsList string
 
 
 
@@ -66,6 +66,7 @@ func LoadConfiguration(filename string) ConfigType {
 	if err != nil {
 		panic(err)
 	}
+	printBootLogo()
 	fmt.Printf("--> Configuration loaded values: %#v\n", config)
 
 
@@ -118,5 +119,36 @@ func GetAlert( alertName string ) *RuleType {
 	}
 
 	return alertsMap[alertName]
+
+}
+
+
+
+
+// readLines reads a whole file into memory
+// and returns a slice of its lines.
+func readLines(path string) ([]string, error) {
+
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	var lines []string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+	return lines, scanner.Err()
+}
+
+
+func printBootLogo() {
+
+	lines, _ := readLines("boot_logo.txt")
+	for _, line := range lines {
+		fmt.Println(line)
+	}
 
 }
