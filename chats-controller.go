@@ -15,6 +15,7 @@ const (
 	JOAN_CHAT_ID int64 = 146665083
 	ONEBOX_ALERT_CHAT_ID int64 = -126617985
 	GROUP_TEST_CHAT_ID int64 = -117924915
+	ONEBOX_MONITORING_ALERTS_CHAT_ID int64 = -114003924
 
 )
 
@@ -62,6 +63,10 @@ func ChatsController(w http.ResponseWriter, request *http.Request) {
 	chat = new(ChatResponseType)
 	chat.Id = GROUP_TEST_CHAT_ID
 	chat.Description = "Group Test chat"
+	chats = append(chats, chat)
+	chat = new(ChatResponseType)
+	chat.Id = ONEBOX_MONITORING_ALERTS_CHAT_ID
+	chat.Description = "Onebox monitoring alert group"
 	chats = append(chats, chat)
 
 	chatsResponse := new(ChatsResponseType)
