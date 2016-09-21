@@ -21,11 +21,11 @@ var eurekaConn fargo.EurekaConnection
 // Register and keep the eureka connection
 func registerToEureka( ) (fargo.EurekaConnection, fargo.Instance) {
 
-	eurekaConn = fargo.NewConn("http://pre.eureka1.oneboxtickets.com:8761")
+	eurekaConn = fargo.NewConn("http://pro.eureka1.oneboxtickets.com:8761")
 	hostname, _ := os.Hostname()
 	i := fargo.Instance{
 		HostName:         hostname,
-		Port:             8000,
+		Port:             8001,
 		App:              "jacaranda",
 		IPAddr:           hostname,
 		SecureVipAddress: "10.1.121.199",

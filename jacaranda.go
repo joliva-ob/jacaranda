@@ -25,8 +25,8 @@ func main() {
 	var filename = os.Getenv("CONF_PATH") + "/" + os.Getenv("ENV") + ".yml"
 	config = LoadConfiguration(filename)
 	InitializeTelegramBot() // Create and initialize the bot
-	ec, i := registerToEureka()
-	go sendHeartBeatToEureka(ec, i)
+//	ec, i := registerToEureka()
+//	go sendHeartBeatToEureka(ec, i)
 	log.Infof("jacaranda started with environment: %s and listening in port: %v\n", os.Getenv("ENV"), config.Server_port)
 
 
