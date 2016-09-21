@@ -19,6 +19,7 @@ const (
 	START = "/start"
 	STOP = "/stop"
 	LIST = "/list"
+	STATUS = "/status"
 )
 
 
@@ -89,6 +90,8 @@ func processMessage( message telebot.Message )  {
 			processAndNotifyWatchdogChange(message, rule, START)
 		case STOP:
 			processAndNotifyWatchdogChange(message, rule, STOP)
+		case STATUS:
+			getCurrentStatus(message)
 		}
 
 	}

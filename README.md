@@ -29,6 +29,7 @@ Kubernetes
 
 
 ## DONE list
+1.0.0
 + load configuration from yml file
 + send message to chat
 + listening telegram bot
@@ -39,3 +40,5 @@ Kubernetes
 + start/stop from endpoint/bot
 + dockerization
 + check unit tests coverage
+1.1.0
++ added /status bot command

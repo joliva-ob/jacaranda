@@ -14,7 +14,6 @@ import (
 
 // Global vars
 var config ConfigType
-var log = logging.MustGetLogger("jacaranda")
 var alertsMap map[string] *RuleType
 
 

@@ -18,6 +18,8 @@ const (
 	ABOVE  =  "above"
 	ENABLED = "enabled"
 	DISABLED = "disabled"
+	CHECK = "check"
+	EVALUATE = "evaluate"
 )
 
 
@@ -92,8 +94,6 @@ func processAndNotifyWatchdogChange( message telebot.Message, rule *RuleType, ac
  as the aggregation to count an absolute number (aggregations.count)
  http://pre.consolemonit1.oneboxtickets.com:9200/_plugin/marvel/sense/index.html
  */
-// TODO passar per parametre el Ticker d'espera més un ticker de auto-restart,
-// TODO previament registrats a un map per accedir directament al channel i reprogramar-los
 func watchdogRoutine( rule *RuleType ) {
 
 	// Open connection to elasticsearch and keep it
@@ -107,7 +107,7 @@ func watchdogRoutine( rule *RuleType ) {
 		select {
 		case <- ticker:
 			if rule.Alert_status == ENABLED && isTimeWindow(rule.Time_window_utc) {
-				processRule( rule, elk_conn )
+				processRule( rule, elk_conn, EVALUATE )
 			}
 		}
 	}
@@ -141,7 +141,7 @@ func isTimeWindow( timeWindow string ) bool {
  on the rules defined by configuration.
  }
  */
-func  processRule( rule *RuleType, elk_conn *elastigo.Conn  )  {
+func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string  ) float64 {
 
 	// retrieve data from index
 	args := make(map[string]interface{})
@@ -166,13 +166,19 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn  )  {
 		}
 
 //		log.Debugf("RuleName: %v --> out: %v res addr: %v out addr: %v", rule.Alert_name, res.Count.Value, &res, &out)
-		evaluateResponse( res, rule )
+		switch action {
+		case EVALUATE:
+			evaluateResponse( res, rule )
+		case CHECK:
+			return res.Count.Value
+		}
 
 	}
 	if err != nil {
 		log.Errorf("[%v] Error occurred while trying to retrieve elasticsearch data: %v", rule.Alert_name, err)
 	}
 
+	return 0
 }
 
 
@@ -209,4 +215,27 @@ func evaluateResponse( res *ElkAggregationsResponse, rule *RuleType ) {
 		log.Warning(alert_message)
 	}
 
+}
+
+
+
+/*
+ Retrieve the current monitoring kpi values
+ */
+func getCurrentStatus( message telebot.Message ) error {
+
+	currentStatus := "Current status is:\n"
+
+	for i := 0; i<len(config.Rules); i++ {
+
+		value := processRule( &config.Rules[i], elk_conn, CHECK)
+		alertName := config.Rules[i].Alert_name
+		currentStatus = currentStatus + alertName + "\t" + strconv.FormatFloat(value, 'f', 6, 64) + "\n"
+
+	}
+
+	bot.SendMessage(message.Chat, currentStatus, nil)
+	log.Infof("/status requested from Chat ID: %v", message.Chat.ID)
+
+	return nil
 }
