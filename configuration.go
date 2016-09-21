@@ -15,6 +15,7 @@ import (
 // Global vars
 var config ConfigType
 var alertsMap map[string] *RuleType
+var log *logging.Logger
 
 
 
@@ -80,6 +81,8 @@ func LoadConfiguration(filename string) ConfigType {
 	logbackend2 := logging.NewLogBackend(f, "", 0)
 	logbackend2Formatted := logging.NewBackendFormatter(logbackend2, format)
 	logging.SetBackend(logbackend1Formatted, logbackend2Formatted)
+
+	log = logging.MustGetLogger("jacaranda")
 
 	return config
 }

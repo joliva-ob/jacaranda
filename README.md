@@ -26,6 +26,7 @@ Kubernetes
 ## TODO list
 + re-start an alert previously disabled manually after 24 hour.
 + use docker templates
++ register to eureka
 
 
 ## DONE list
@@ -42,3 +43,5 @@ Kubernetes
 + check unit tests coverage
 1.1.0
 + added /status bot command
+1.1.1
++ bug fixing
