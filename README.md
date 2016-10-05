@@ -25,8 +25,10 @@ Kubernetes
 
 ## TODO list
 + re-start an alert previously disabled manually after 24 hour.
-+ use docker templates
-+ register to eureka
++ register to eureka and its heartbeat
++ Dockerfile + captain for Onebox Jenkins
++ Double check /info and /health for onebox requirements
++ Double check environment vars for jenkins + kubernetes
 
 
 ## DONE list
@@ -43,5 +45,9 @@ Kubernetes
 + check unit tests coverage
 1.1.0
 + added /status bot command
+
 1.1.1
 + bug fixing
+
+1.1.2
++ fixed precision from alerting values

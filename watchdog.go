@@ -78,7 +78,7 @@ func processAndNotifyWatchdogChange( message telebot.Message, rule *RuleType, ac
 
 	} else {
 		// ERROR message
-		bot.SendMessage(message.Chat, "Error starting rule, does not exist.", nil)
+		bot.SendMessage(message.Chat, "Error stopping rule, does not exist.", nil)
 		return errors.New("Error starting rule, does not exist.")
 	}
 
@@ -206,7 +206,7 @@ func evaluateResponse( res *ElkAggregationsResponse, rule *RuleType ) {
 
 	if isRaised {
 
-		alert_message := "Alert: rule " + rule.Alert_name + " " + strconv.FormatFloat(res.Count.Value, 'f', 6, 64) + " is " + rule.Raise_Condition + " than threshold " + strconv.FormatFloat(rule.Threshold, 'f', 6, 64)
+		alert_message := "Alert: rule " + rule.Alert_name + " " + strconv.FormatFloat(res.Count.Value, 'f', 0, 64) + " is " + rule.Raise_Condition + " than threshold " + strconv.FormatFloat(rule.Threshold, 'f', 0, 64)
 		err := sendTelegramMessage( rule.Telegram_chat_id, alert_message )
 		if err != nil {
 			log.Error(err)
@@ -230,7 +230,8 @@ func getCurrentStatus( message telebot.Message ) error {
 
 		value := processRule( &config.Rules[i], elk_conn, CHECK)
 		alertName := config.Rules[i].Alert_name
-		currentStatus = currentStatus + alertName + "\t" + strconv.FormatFloat(value, 'f', 6, 64) + "\n"
+		alertFrame := config.Rules[i].Time_frame_sec
+		currentStatus = currentStatus + alertName + "\t" + strconv.FormatFloat(value, 'f', 0, 64) + " in " + alertFrame + "seconds.\n"
 
 	}
 
