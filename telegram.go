@@ -20,6 +20,7 @@ const (
 	STOP = "/stop"
 	LIST = "/list"
 	STATUS = "/status"
+	EXEC = "/exec"
 )
 
 
@@ -92,6 +93,9 @@ func processMessage( message telebot.Message )  {
 			processAndNotifyWatchdogChange(message, rule, STOP)
 		case STATUS:
 			getCurrentStatus(message)
+		case EXEC:
+			out := execCommandLine(words,message)
+			bot.SendMessage(message.Chat, out, nil)
 		}
 
 	}

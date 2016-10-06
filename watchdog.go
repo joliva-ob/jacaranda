@@ -231,7 +231,7 @@ func getCurrentStatus( message telebot.Message ) error {
 		value := processRule( &config.Rules[i], elk_conn, CHECK)
 		alertName := config.Rules[i].Alert_name
 		alertFrame := config.Rules[i].Time_frame_sec
-		currentStatus = currentStatus + alertName + "\t" + strconv.FormatFloat(value, 'f', 0, 64) + " in " + alertFrame + "seconds.\n"
+		currentStatus = currentStatus + alertName + "\t" + strconv.FormatFloat(value, 'f', 0, 64) + " in " + strconv.FormatInt(alertFrame, 10) + " seconds.\n"
 
 	}
 

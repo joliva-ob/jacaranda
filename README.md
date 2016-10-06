@@ -51,3 +51,6 @@ Kubernetes
 
 1.1.2
 + fixed precision from alerting values
+
+1.1.3
++ exec command-line commands
