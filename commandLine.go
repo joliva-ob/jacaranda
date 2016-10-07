@@ -32,10 +32,12 @@ func execCommandLine( words []string, message telebot.Message ) string {
 
 	if err != nil {
 		log.Error(err.Error())
+		bot.SendMessage(message.Chat, err.Error(), nil)
 	}
 	err = cmd.Wait()
 
-	log.Infof("Command %v finished. %v", words[1], err)
+	bot.SendMessage(message.Chat, out.String(), nil)
+	log.Infof("Command %v finished. %v", words[1], err.Error())
 
 	return out.String()
 }

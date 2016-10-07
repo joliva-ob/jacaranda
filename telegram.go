@@ -81,7 +81,7 @@ func processMessage( message telebot.Message )  {
 
 		switch words[0] {
 		case HELP:
-			bot.SendMessage(message.Chat, "version 1.1.3\nBot commands available are:\n/help\n/list\n/start {alert_name}\n/stop {alert_name}\n/status", nil)
+			bot.SendMessage(message.Chat, "version 1.1.4\nBot commands available are:\n/help\n/list\n/start {alert_name}\n/stop {alert_name}\n/status", nil)
 			log.Info("/help requested from Chat ID: %v", message.Chat.ID)
 		case LIST:
 			alist := GetAlerts()
@@ -94,8 +94,7 @@ func processMessage( message telebot.Message )  {
 		case STATUS:
 			getCurrentStatus(message)
 		case EXEC:
-			out := execCommandLine(words,message)
-			bot.SendMessage(message.Chat, out, nil)
+			execCommandLine(words,message)
 		}
 
 	}

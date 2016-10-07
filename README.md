@@ -54,3 +54,6 @@ Kubernetes
 
 1.1.3
 + exec command-line commands
+
+1.1.4
++ command line bug fixing
