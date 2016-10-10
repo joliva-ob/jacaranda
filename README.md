@@ -24,6 +24,7 @@ Kubernetes
 
 
 ## TODO list
++ get goroutine status from the goroutine, not from the global status list
 + re-start an alert previously disabled manually after 24 hour.
 + register to eureka and its heartbeat
 + Dockerfile + captain for Onebox Jenkins
@@ -43,6 +44,7 @@ Kubernetes
 + start/stop from endpoint/bot
 + dockerization
 + check unit tests coverage
+
 1.1.0
 + added /status bot command
 
@@ -57,3 +59,6 @@ Kubernetes
 
 1.1.4
 + command line bug fixing
+
+1.1.4.1
++ command line disabled

@@ -26,6 +26,7 @@ const (
 var (
 
 	elk_conn *elastigo.Conn
+	statusChan chan string
 
 )
 
@@ -47,9 +48,11 @@ type ElkAggregationsResponse struct {
  */
 func startAlertsWatchdogs() {
 
+//	statusChan = make(<-chan string)
+
 	for i := 0; i<len(config.Rules); i++ {
 
-		go watchdogRoutine( &config.Rules[i] )
+		go watchdogRoutine( &config.Rules[i], statusChan )
 
 		log.Infof("Watchdog started for rule: %v", (config.Rules[i]).Alert_name)
 	}
@@ -89,18 +92,19 @@ func processAndNotifyWatchdogChange( message telebot.Message, rule *RuleType, ac
 
 /*
  Goroutine to keep listening a metric and rise a message
- in case of threashold were reached.
+ in case of a threshold were reached.
  get the query directly from consolemonit.metric index and eval the rule into elk (avg, elapsed time, count, whatever...)
  as the aggregation to count an absolute number (aggregations.count)
  http://pre.consolemonit1.oneboxtickets.com:9200/_plugin/marvel/sense/index.html
  */
-func watchdogRoutine( rule *RuleType ) {
+func watchdogRoutine( rule *RuleType, statusChan chan string) {
 
 	// Open connection to elasticsearch and keep it
 	elk_host := rule.Elk_host
 	elk_conn = elastigo.NewConn()
 	elk_conn.Domain = elk_host
 	ticker := time.Tick(time.Duration(rule.Check_time_sec * 1000) * time.Millisecond)
+//	var statusAction string
 	log.Infof("Watchdog [%s]--> Elasticsearch connected to host: %v", rule.Alert_name, rule.Elk_host)
 
 	for {
@@ -109,6 +113,9 @@ func watchdogRoutine( rule *RuleType ) {
 			if rule.Alert_status == ENABLED && isTimeWindow(rule.Time_window_utc) {
 				processRule( rule, elk_conn, EVALUATE )
 			}
+//		case statusAction <- statusChan:
+//			currentValue := processRule(rule, elk_conn, statusAction )
+//			log.Debugf("Rule %v is %v with current value of: %v", rule.Alert_name, rule.Alert_status, strconv.FormatFloat(currentValue, 'f', 0, 64))
 		}
 	}
 
@@ -228,6 +235,7 @@ func getCurrentStatus( message telebot.Message ) error {
 
 	for i := 0; i<len(config.Rules); i++ {
 
+		statusChan <- CHECK
 		value := processRule( &config.Rules[i], elk_conn, CHECK)
 		alertName := config.Rules[i].Alert_name
 		alertFrame := config.Rules[i].Time_frame_sec
