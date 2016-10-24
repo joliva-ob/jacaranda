@@ -26,7 +26,7 @@ const (
 var (
 
 	elk_conn *elastigo.Conn
-	statusChan chan string
+	statusChan = make(chan string)
 
 )
 
@@ -47,8 +47,6 @@ type ElkAggregationsResponse struct {
  threashold is reached.
  */
 func startAlertsWatchdogs() {
-
-//	statusChan = make(<-chan string)
 
 	for i := 0; i<len(config.Rules); i++ {
 
@@ -104,7 +102,7 @@ func watchdogRoutine( rule *RuleType, statusChan chan string) {
 	elk_conn = elastigo.NewConn()
 	elk_conn.Domain = elk_host
 	ticker := time.Tick(time.Duration(rule.Check_time_sec * 1000) * time.Millisecond)
-//	var statusAction string
+	var statusAction string
 	log.Infof("Watchdog [%s]--> Elasticsearch connected to host: %v", rule.Alert_name, rule.Elk_host)
 
 	for {
@@ -113,9 +111,9 @@ func watchdogRoutine( rule *RuleType, statusChan chan string) {
 			if rule.Alert_status == ENABLED && isTimeWindow(rule.Time_window_utc) {
 				processRule( rule, elk_conn, EVALUATE )
 			}
-//		case statusAction <- statusChan:
-//			currentValue := processRule(rule, elk_conn, statusAction )
-//			log.Debugf("Rule %v is %v with current value of: %v", rule.Alert_name, rule.Alert_status, strconv.FormatFloat(currentValue, 'f', 0, 64))
+		case statusAction = <- statusChan:
+			currentValue := processRule(rule, elk_conn, statusAction )
+			log.Debugf("Watchdog rule %v is %v with current value of: %v", rule.Alert_name, rule.Alert_status, strconv.FormatFloat(currentValue, 'f', 0, 64))
 		}
 	}
 
@@ -154,6 +152,7 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string  ) flo
 	args := make(map[string]interface{})
 	args["size"] = 1
 	args["from"] = 0
+	args["timeout"] = rule.Elk_timeout
 	lte := time.Now().UnixNano() / (int64(time.Millisecond)/int64(time.Nanosecond))
 	duration := int64(rule.Time_frame_sec) * 1000
 	gte := lte - duration
@@ -164,6 +163,10 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string  ) flo
 
 	// Query elasticsearch
 	out, err := elk_conn.Search(rule.Elk_index, "", args, query)
+	if err != nil {
+		log.Errorf("[%v] Error occurred while trying to retrieve elasticsearch data: %v", rule.Alert_name, err)
+		return 0
+	}
 
 	if out.Hits.Total >= rule.Min_items {
 
@@ -180,9 +183,6 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string  ) flo
 			return res.Count.Value
 		}
 
-	}
-	if err != nil {
-		log.Errorf("[%v] Error occurred while trying to retrieve elasticsearch data: %v", rule.Alert_name, err)
 	}
 
 	return 0

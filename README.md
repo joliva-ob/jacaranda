@@ -30,6 +30,7 @@ Kubernetes
 + Dockerfile + captain for Onebox Jenkins
 + Double check /info and /health for onebox requirements
 + Double check environment vars for jenkins + kubernetes
++ Use vendors to ensure version dependencies
 
 
 ## DONE list
@@ -62,3 +63,13 @@ Kubernetes
 
 1.1.4.1
 + command line disabled
+
+1.1.4.2
++ status debug from inside goroutine watchdog
+
+1.1.4.3
++ added alarm for response time 3rd party integrations
+
+1.1.5
++ Added timeout on elasticsearch queries
++ improved security on elasticsearch queries
