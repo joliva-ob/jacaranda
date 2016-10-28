@@ -140,7 +140,6 @@ func isTimeWindow( timeWindow string ) bool {
 
 
 
-
 /*
  Generic process to get data from a metric and evaluate func init() {
  on the rules defined by configuration.
