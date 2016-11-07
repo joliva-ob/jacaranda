@@ -207,7 +207,6 @@ func processOutMetric( out elastigo.SearchResult, rule *RuleType, action string 
 
 func elkQuerySearch( rule *RuleType, _type string, args map[string]interface{}, query interface{}) {
 
-	time.Sleep(10000 * time.Millisecond)
 	out, err := elk_conn.Search(rule.Elk_index, _type, args, query)
 	if err != nil {
 		log.Errorf("[%v] Error occurred while trying to retrieve elasticsearch data: %v", rule.Alert_name, err)
