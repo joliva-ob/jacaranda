@@ -27,7 +27,6 @@ var (
 
 	elk_conn *elastigo.Conn
 	statusChan = make(chan string)
-	elkChan = make(chan *ElkResponse)
 
 )
 
@@ -109,16 +108,17 @@ func watchdogRoutine( rule *RuleType, statusChan chan string) {
 	elk_conn.Domain = elk_host
 	ticker := time.Tick(time.Duration(rule.Check_time_sec * 1000) * time.Millisecond)
 	var statusAction string
+	elkChan := make(chan *ElkResponse)
 	log.Infof("Watchdog [%s]--> Elasticsearch connected to host: %v", rule.Alert_name, rule.Elk_host)
 
 	for {
 		select {
 		case <- ticker:
 			if rule.Alert_status == ENABLED && isTimeWindow(rule.Time_window_utc) {
-				processRule( rule, elk_conn, EVALUATE )
+				processRule( rule, elk_conn, EVALUATE, elkChan )
 			}
 		case statusAction = <- statusChan:
-			currentValue := processRule(rule, elk_conn, statusAction )
+			currentValue := processRule(rule, elk_conn, statusAction, elkChan )
 			log.Debugf("Watchdog rule %v is %v with current value of: %v", rule.Alert_name, rule.Alert_status, strconv.FormatFloat(currentValue, 'f', 0, 64))
 		}
 	}
@@ -151,7 +151,7 @@ func isTimeWindow( timeWindow string ) bool {
  on the rules defined by configuration.
  }
  */
-func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string  ) float64 {
+func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string, elkChan chan *ElkResponse  ) float64 {
 
 	// retrieve data from index
 	args := make(map[string]interface{})
@@ -168,7 +168,9 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string  ) flo
 	// Query elasticsearch
 	var elkRsp *ElkResponse
 	timer := time.NewTimer(time.Duration(rule.Elk_timeout) * time.Millisecond)
-	go elkQuerySearch(rule, "", args, query)
+
+	go elkQuerySearch(rule, "", args, query, elkChan)
+
 	select {
 	case elkRsp = <- elkChan:
 		if elkRsp.Err == nil {
@@ -205,7 +207,7 @@ func processOutMetric( out elastigo.SearchResult, rule *RuleType, action string 
 
 
 
-func elkQuerySearch( rule *RuleType, _type string, args map[string]interface{}, query interface{}) {
+func elkQuerySearch( rule *RuleType, _type string, args map[string]interface{}, query interface{}, elkChan chan *ElkResponse) {
 
 	out, err := elk_conn.Search(rule.Elk_index, _type, args, query)
 	if err != nil {
@@ -263,7 +265,8 @@ func getCurrentStatus( message telebot.Message ) error {
 	for i := 0; i<len(config.Rules); i++ {
 
 		statusChan <- CHECK
-		value := processRule( &config.Rules[i], elk_conn, CHECK)
+		elkChan := make(chan *ElkResponse)
+		value := processRule( &config.Rules[i], elk_conn, CHECK, elkChan)
 		alertName := config.Rules[i].Alert_name
 		alertFrame := config.Rules[i].Time_frame_sec
 		currentStatus = currentStatus + alertName + "\t" + strconv.FormatFloat(value, 'f', 0, 64) + " in " + strconv.FormatInt(alertFrame, 10) + " seconds.\n"
