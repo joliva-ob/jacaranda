@@ -24,7 +24,7 @@ Kubernetes
 
 
 ## TODO list
-+ get goroutine status from the goroutine, not from the global status list
++ alert when timeout reached on getting ELK metrics
 + re-start an alert previously disabled manually after 24 hour.
 + register to eureka and its heartbeat
 + Dockerfile + captain for Onebox Jenkins
@@ -73,3 +73,6 @@ Kubernetes
 1.1.5
 + Added timeout on elasticsearch queries
 + improved security on elasticsearch queries
+
+1.1.6
++ Improved alerting in case of elk timeout

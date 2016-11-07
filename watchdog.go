@@ -3,7 +3,6 @@ package main
 
 import (
 
-	"encoding/json"
 	"time"
 	"strings"
 	"strconv"
@@ -11,6 +10,7 @@ import (
 
 	"github.com/mattbaird/elastigo/lib"
 	"github.com/tucnak/telebot"
+	"encoding/json"
 )
 
 const (
@@ -27,6 +27,7 @@ var (
 
 	elk_conn *elastigo.Conn
 	statusChan = make(chan string)
+	elkChan = make(chan *ElkResponse)
 
 )
 
@@ -39,6 +40,11 @@ type ElkAggregationsResponse struct {
 	      } `json:"count"`
 }
 
+type ElkResponse struct {
+
+	Out elastigo.SearchResult
+	Err error
+}
 
 
 /*
@@ -158,14 +164,26 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string  ) flo
 	query := rule.Elk_filter
 	query = strings.Replace(query, "$lte", strconv.FormatInt(lte, 10), -1)
 	query = strings.Replace(query, "$gte", strconv.FormatInt(gte, 10), -1)
-//	log.Debugf("RuleName: %v --> gte: %v lte: %v query: ", rule.Alert_name, strconv.FormatInt(gte, 10), strconv.FormatInt(lte, 10), query)
 
 	// Query elasticsearch
-	out, err := elk_conn.Search(rule.Elk_index, "", args, query)
-	if err != nil {
-		log.Errorf("[%v] Error occurred while trying to retrieve elasticsearch data: %v", rule.Alert_name, err)
-		return 0
+	var elkRsp *ElkResponse
+	timer := time.NewTimer(time.Duration(rule.Elk_timeout) * time.Millisecond)
+	go elkQuerySearch(rule, "", args, query)
+	select {
+	case elkRsp = <- elkChan:
+		if elkRsp.Err == nil {
+			timer.Stop()
+			return processOutMetric( elkRsp.Out, rule, action )
+		}
+	case <- timer.C:
+		log.Errorf("[%v] Timeout on elk query search (%v sec)", rule.Alert_name, rule.Elk_timeout)
 	}
+
+	return 0
+}
+
+
+func processOutMetric( out elastigo.SearchResult, rule *RuleType, action string ) float64 {
 
 	if out.Hits.Total >= rule.Min_items {
 
@@ -174,17 +192,29 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string  ) flo
 			log.Error(err)
 		}
 
-//		log.Debugf("RuleName: %v --> out: %v res addr: %v out addr: %v", rule.Alert_name, res.Count.Value, &res, &out)
 		switch action {
 		case EVALUATE:
 			evaluateResponse( res, rule )
 		case CHECK:
 			return res.Count.Value
 		}
-
 	}
 
 	return 0
+}
+
+
+
+func elkQuerySearch( rule *RuleType, _type string, args map[string]interface{}, query interface{}) {
+
+	time.Sleep(10000 * time.Millisecond)
+	out, err := elk_conn.Search(rule.Elk_index, _type, args, query)
+	if err != nil {
+		log.Errorf("[%v] Error occurred while trying to retrieve elasticsearch data: %v", rule.Alert_name, err)
+	}
+
+	elkChan <- &ElkResponse{out, err}
+
 }
 
 
@@ -195,7 +225,6 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string  ) flo
 func evaluateResponse( res *ElkAggregationsResponse, rule *RuleType ) {
 
 	isRaised := false
-
 
 	switch rule.Raise_Condition {
 	case BELOW:
