@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="add547fa-9d2c-4c0f-b2e7-9f108c98851b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pod-doublecheck.go" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pod-doublecheck_test.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/boot_logo.txt" afterPath="$PROJECT_DIR$/boot_logo.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/configuration.go" afterPath="$PROJECT_DIR$/configuration.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev-joan.yml" afterPath="$PROJECT_DIR$/dev-joan.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pod-doublecheck.go" afterPath="$PROJECT_DIR$/pod-doublecheck.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pod-doublecheck_test.go" afterPath="$PROJECT_DIR$/pod-doublecheck_test.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/telegram.go" afterPath="$PROJECT_DIR$/telegram.go" />
     </list>
     <ignored path="alertmego.iws" />
@@ -42,7 +42,7 @@
         <entry file="file://$PROJECT_DIR$/telegram.go">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="127" column="29" selection-start-line="127" selection-start-column="29" selection-end-line="127" selection-end-column="29" />
+              <caret line="100" column="45" selection-start-line="100" selection-start-column="45" selection-end-line="100" selection-end-column="45" />
               <folding>
                 <element signature="e#15#86#0" expanded="true" />
               </folding>
@@ -54,7 +54,7 @@
         <entry file="file://$PROJECT_DIR$/pod-doublecheck.go">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <caret line="15" column="53" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
               <folding>
                 <element signature="e#14#78#0" expanded="true" />
               </folding>
@@ -75,13 +75,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pod-doublecheck_test.go" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pod-doublecheck_test.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pod-doublecheck_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.7891566">
+              <caret line="64" column="73" selection-start-line="64" selection-start-column="48" selection-end-line="64" selection-end-column="73" />
               <folding>
-                <element signature="e#14#89#0" expanded="true" />
+                <element signature="e#14#106#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -92,6 +92,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="22" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pro.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pro.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -109,10 +119,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dev-joan.yml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dev-joan.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dev-joan.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20179372">
+            <state vertical-scroll-proportion="0.0">
               <caret line="6" column="56" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="56" />
               <folding />
             </state>
@@ -168,14 +178,14 @@
         <option value="$PROJECT_DIR$/.idea/.name" />
         <option value="$PROJECT_DIR$/info-controller.go" />
         <option value="$PROJECT_DIR$/watchdog.go" />
-        <option value="$PROJECT_DIR$/pro.yml" />
         <option value="$PROJECT_DIR$/configuration.go" />
         <option value="$PROJECT_DIR$/boot_logo.txt" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/pod-doublecheck.go" />
         <option value="$PROJECT_DIR$/telegram.go" />
         <option value="$PROJECT_DIR$/dev-joan.yml" />
+        <option value="$PROJECT_DIR$/pro.yml" />
         <option value="$PROJECT_DIR$/pod-doublecheck_test.go" />
+        <option value="$PROJECT_DIR$/pod-doublecheck.go" />
       </list>
     </option>
   </component>
@@ -195,7 +205,7 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="57" />
+    <option name="x" value="31" />
     <option name="y" value="156" />
     <option name="width" value="1473" />
     <option name="height" value="871" />
@@ -278,7 +288,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Application.jacaranda DEV">
+  <component name="RunManager" selected="Go Test.pod-doublecheck_test.go">
     <configuration default="false" name="pod-doublecheck_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
       <module name="jacaranda" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -855,47 +865,47 @@
       <workItem from="1479140212666" duration="4933000" />
       <workItem from="1480526264909" duration="552000" />
       <workItem from="1480885876470" duration="597000" />
-      <workItem from="1480955182054" duration="9513000" />
+      <workItem from="1480955182054" duration="14014000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 10h 57m 39s.xml">
+    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 11h 57m 04s.xml">
       <configuration name="pod-doublecheck_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 10h 59m 17s.xml">
+    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 11h 57m 30s.xml">
       <configuration name="pod-doublecheck_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 11h 01m 45s.xml">
+    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 11h 57m 46s.xml">
       <configuration name="pod-doublecheck_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 11h 02m 24s.xml">
+    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 11h 58m 15s.xml">
       <configuration name="pod-doublecheck_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 11h 03m 41s.xml">
+    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 12h 01m 19s.xml">
       <configuration name="pod-doublecheck_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 11h 04m 15s.xml">
+    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 12h 01m 52s.xml">
       <configuration name="pod-doublecheck_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 11h 06m 51s.xml">
+    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 12h 02m 05s.xml">
       <configuration name="pod-doublecheck_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 11h 08m 36s.xml">
+    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 12h 08m 00s.xml">
       <configuration name="pod-doublecheck_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 11h 08m 52s.xml">
+    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 12h 25m 03s.xml">
       <configuration name="pod-doublecheck_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 11h 10m 22s.xml">
+    <history-entry file="pod-doublecheck_test_go - 2016.12.15 at 12h 26m 34s.xml">
       <configuration name="pod-doublecheck_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="228216000" />
+    <option name="totallyTimeSpent" value="232717000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="57" y="156" width="1473" height="871" extended-state="0" />
+    <frame x="31" y="156" width="1473" height="871" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -904,7 +914,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29818955" sideWeight="0.19771864" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32979977" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37051794" sideWeight="0.8022814" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30146083" sideWeight="0.8022814" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26415095" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1207,7 +1217,7 @@
         <state vertical-scroll-proportion="0.2642405">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <element signature="e#15#64#0" expanded="true" />
+            <element signature="e#15#64#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1302,36 +1312,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pod-doublecheck_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <element signature="e#14#89#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/telegram.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="127" column="29" selection-start-line="127" selection-start-column="29" selection-end-line="127" selection-end-column="29" />
-          <folding>
-            <element signature="e#15#86#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pod-doublecheck.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="e#14#78#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
@@ -1351,19 +1331,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pro.yml">
+    <entry file="file://$PROJECT_DIR$/dev-joan.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10089686">
-          <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="56" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev-joan.yml">
+    <entry file="file://$PROJECT_DIR$/pro.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20179372">
-          <caret line="6" column="56" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/telegram.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="100" column="45" selection-start-line="100" selection-start-column="45" selection-end-line="100" selection-end-column="45" />
+          <folding>
+            <element signature="e#15#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pod-doublecheck.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="53" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+          <folding>
+            <element signature="e#14#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pod-doublecheck_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7891566">
+          <caret line="64" column="73" selection-start-line="64" selection-start-column="48" selection-end-line="64" selection-end-column="73" />
+          <folding>
+            <element signature="e#14#106#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
