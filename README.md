@@ -76,3 +76,6 @@ Kubernetes
 
 1.1.6
 + Improved alerting in case of elk timeout
+
+1.1.7
++ Added capabilities to talk with Pod-Doublecheck from Bot

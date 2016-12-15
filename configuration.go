@@ -47,6 +47,7 @@ type ConfigType struct {
 	Eureka_ip_addr string
 	Eureka_app_name string
 	Telegram_bot_token string
+	Pod_doublecheck_url string
 	Rules[] RuleType
 }
 

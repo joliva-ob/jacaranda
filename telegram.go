@@ -5,9 +5,8 @@ import (
 
 	"time"
 	"strings"
-
+	"strconv"
 	"github.com/tucnak/telebot"
-
 
 )
 
@@ -21,6 +20,7 @@ const (
 	LIST = "/list"
 	STATUS = "/status"
 	EXEC = "/exec"
+	POD_DOUBLECHECK = "/pod-doublecheck"
 )
 
 
@@ -72,16 +72,18 @@ func processMessage( message telebot.Message )  {
 
 	words := strings.Fields(message.Text)
 	var rule *RuleType
+	var newRefreshtime int
 
 	if len(words) > 0 {
 
 		if len(words) > 1 {
 			rule = GetAlert(words[1])
+			newRefreshtime = getNewRefreshtime(words[1])
 		}
 
 		switch words[0] {
 		case HELP:
-			bot.SendMessage(message.Chat, "version 1.1.6\nBot commands available are:\n/help\n/list\n/start {alert_name}\n/stop {alert_name}\n/status", nil)
+			bot.SendMessage(message.Chat, "version 1.1.7\nBot commands available are:\n/help\n/list\n/start {alert_name}\n/stop {alert_name}\n/status\n/pod-doublecheck {>0: new_refresh_time_sec/<=0: is to disable}", nil)
 			log.Info("/help requested from Chat ID: %v", message.Chat.ID)
 		case LIST:
 			alist := GetAlerts()
@@ -95,12 +97,24 @@ func processMessage( message telebot.Message )  {
 			getCurrentStatus(message)
 //		case EXEC:
 //			execCommandLine(words,message)
+		case POD_DOUBLECHECK:
+			processNewPodDoublecheckRefreshtime(newRefreshtime, &message)
 		}
 
 	}
 
 }
 
+
+
+func getNewRefreshtime(strTime string) int {
+	newtime, err := strconv.Atoi(strTime)
+	if err != nil {
+		return 0
+	} else {
+		return newtime
+	}
+}
 
 
 
