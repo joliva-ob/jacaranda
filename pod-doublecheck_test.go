@@ -7,8 +7,10 @@ import (
 	"testing"
 	"strconv"
 	"github.com/stretchr/testify/assert"
-
+	"io/ioutil"
 	"fmt"
+	"encoding/json"
+	"github.com/joliva-ob/pod-doublecheck/handler"
 )
 
 
@@ -33,6 +35,20 @@ func TestChangePodDoubleChecktime(t *testing.T) {
 	}
 }
 
+
+
+func TestGetPodDoublecheckStatus(t *testing.T) {
+
+	url := "http://10.1.2.173:30920/monitoring"
+	res, _ := sendHttpRequest("GET", url, nil, nil)
+
+	jsonData, _ := ioutil.ReadAll(res.Body)
+	var monitoring handler.MonitoringType
+	json.Unmarshal(jsonData, monitoring)
+	//value := Monitoring["Pods not found"].Value
+	fmt.Printf("%v", monitoring)
+
+}
 
 
 

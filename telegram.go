@@ -7,7 +7,6 @@ import (
 	"strings"
 	"strconv"
 	"github.com/tucnak/telebot"
-
 )
 
 
@@ -72,13 +71,11 @@ func processMessage( message telebot.Message )  {
 
 	words := strings.Fields(message.Text)
 	var rule *RuleType
-	var newRefreshtime int
 
 	if len(words) > 0 {
 
 		if len(words) > 1 {
 			rule = GetAlert(words[1])
-			newRefreshtime = getNewRefreshtime(words[1])
 		}
 
 		switch words[0] {
@@ -98,7 +95,7 @@ func processMessage( message telebot.Message )  {
 //		case EXEC:
 //			execCommandLine(words,message)
 		case POD_DOUBLECHECK:
-			processNewPodDoublecheckRefreshtime(newRefreshtime, &message)
+			processPodDoublecheck(words[1], &message)
 		}
 
 	}
@@ -107,12 +104,28 @@ func processMessage( message telebot.Message )  {
 
 
 
-func getNewRefreshtime(strTime string) int {
+func processPodDoublecheck(param string, message *telebot.Message) {
+
+	if param != "" {
+		newRefreshtime, err := getNewRefreshtime(param)
+		if err != nil {
+			processPodDoubleCheckStatus(param, message)
+		} else {
+			processNewPodDoublecheckRefreshtime(newRefreshtime, message)
+		}
+	} else {
+		bot.SendMessage(message.Chat, "Param not allowed: "+param+". Valid ones are {status/int}", nil)
+	}
+}
+
+
+
+func getNewRefreshtime(strTime string) (int, error) {
 	newtime, err := strconv.Atoi(strTime)
 	if err != nil {
-		return 0
+		return -99, err
 	} else {
-		return newtime
+		return newtime, nil
 	}
 }
 

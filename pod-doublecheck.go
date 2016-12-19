@@ -3,15 +3,48 @@ package main
 import (
 
 	"net/http"
-
+	"io/ioutil"
 	"github.com/tucnak/telebot"
 	"strconv"
 )
 
 
+type MonitoringType struct {
+	Name string
+	Value int64
+	Threshold int64
+	Alert bool
+}
+
+
+var Monitoring = make(map[string]*MonitoringType)
+
+
+// get and send the status by requesting it to pod-doublecheck microservice
+func processPodDoubleCheckStatus( param string, message *telebot.Message) {
+
+	switch param {
+	case "status":
+
+		url := config.Pod_doublecheck_url+"monitoring"
+		res, err := sendHttpRequest("GET", url, nil, nil)
+
+		if err != nil {
+			bot.SendMessage(message.Chat, "Error retrieving status from pod-doublecheck monitoring: "+err.Error(), nil)
+			log.Infof("Error retrieving status from pod-doublecheck monitoring: %v", err.Error())
+		} else {
+			jsonData, _ := ioutil.ReadAll(res.Body)
+			bot.SendMessage(message.Chat, "Pod-Doublecheck current status is: "+string(jsonData), nil)
+			log.Infof("Pod-Doublecheck current status is: %v", res.Body)
+		}
+	}
+}
+
+
+
 func processNewPodDoublecheckRefreshtime(newRefreshtime int, message *telebot.Message) {
 
-	url := config.Pod_doublecheck_url+strconv.Itoa(newRefreshtime)
+	url := config.Pod_doublecheck_url+"refreshtime?"+strconv.Itoa(newRefreshtime)
 	params := make(map[string]string)
 	params["time"] = strconv.Itoa(newRefreshtime)
 	res, err := sendHttpRequest("PUT", url, params, nil)
