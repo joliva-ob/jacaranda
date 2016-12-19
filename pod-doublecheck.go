@@ -44,7 +44,7 @@ func processPodDoubleCheckStatus( param string, message *telebot.Message) {
 
 func processNewPodDoublecheckRefreshtime(newRefreshtime int, message *telebot.Message) {
 
-	url := config.Pod_doublecheck_url+"refreshtime?"+strconv.Itoa(newRefreshtime)
+	url := config.Pod_doublecheck_url+"refreshtime?"
 	params := make(map[string]string)
 	params["time"] = strconv.Itoa(newRefreshtime)
 	res, err := sendHttpRequest("PUT", url, params, nil)
@@ -53,8 +53,14 @@ func processNewPodDoublecheckRefreshtime(newRefreshtime int, message *telebot.Me
 		bot.SendMessage(message.Chat, "Error changing pod-doublecheck refreshtime to "+strconv.Itoa(newRefreshtime)+" -> "+err.Error(), nil)
 		log.Infof("Error changing pod-doublecheck refreshtime to %v: %v", newRefreshtime, res.Status)
 	} else {
-		bot.SendMessage(message.Chat, "Pod-Doublecheck refresh time changed to: "+strconv.Itoa(newRefreshtime), nil)
-		log.Infof("Pod-Doublecheck refresh time changed to: %v", newRefreshtime)
+		if newRefreshtime <=0 {
+			bot.SendMessage(message.Chat, "Pod-Doublecheck is now stopped.", nil)
+			log.Infof("Pod-Doublecheck is now stopped.")
+		} else {
+			bot.SendMessage(message.Chat, "Pod-Doublecheck refresh time changed to: "+strconv.Itoa(newRefreshtime), nil)
+			log.Infof("Pod-Doublecheck refresh time changed to: %v", newRefreshtime)
+		}
+
 	}
 }
 

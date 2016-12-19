@@ -80,7 +80,7 @@ func processMessage( message telebot.Message )  {
 
 		switch words[0] {
 		case HELP:
-			bot.SendMessage(message.Chat, "version 1.1.10\nBot commands available are:\n/help\n/list\n/start {alert_name}\n/stop {alert_name}\n/status\n/pod-doublecheck {>0: new_refresh_time_sec/<=0: is to disable}", nil)
+			bot.SendMessage(message.Chat, "version 1.1.12\nBot commands available are:\n/help\n/list\n/start {alert_name}\n/stop {alert_name}\n/status\n/pod-doublecheck {>0: new_refresh_time_sec | <=0: is to disable | status: is to get current status}", nil)
 			log.Info("/help requested from Chat ID: %v", message.Chat.ID)
 		case LIST:
 			alist := GetAlerts()
