@@ -79,3 +79,6 @@ Kubernetes
 
 1.1.7
 + Added capabilities to talk with Pod-Doublecheck from Bot
+
+1.1.18
++ Updated response-time limit to 400 ms.
