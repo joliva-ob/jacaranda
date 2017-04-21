@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="add547fa-9d2c-4c0f-b2e7-9f108c98851b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/boot_logo.txt" afterPath="$PROJECT_DIR$/boot_logo.txt" />
-    </list>
+    <list default="true" id="add547fa-9d2c-4c0f-b2e7-9f108c98851b" name="Default" comment="" />
     <ignored path="alertmego.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -97,16 +94,16 @@
         <entry file="file://$PROJECT_DIR$/pro.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="73" column="16" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
+              <caret line="331" column="32" selection-start-line="331" selection-start-column="32" selection-end-line="331" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="boot_logo.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="boot_logo.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/boot_logo.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12552302">
+            <state vertical-scroll-proportion="0.0">
               <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
               <folding />
             </state>
@@ -123,11 +120,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dev-joan.yml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="dev-joan.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dev-joan.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="44" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.3253138">
+              <caret line="277" column="32" selection-start-line="277" selection-start-column="32" selection-end-line="277" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -183,15 +180,15 @@
         <option value="$PROJECT_DIR$/info-controller.go" />
         <option value="$PROJECT_DIR$/watchdog.go" />
         <option value="$PROJECT_DIR$/configuration.go" />
-        <option value="$PROJECT_DIR$/dev-joan.yml" />
         <option value="$PROJECT_DIR$/pod-doublecheck_test.go" />
         <option value="$PROJECT_DIR$/client/jacaranda-client.go" />
         <option value="$PROJECT_DIR$/jacaranda-client/jacaranda-client.go" />
         <option value="$PROJECT_DIR$/telegram.go" />
         <option value="$PROJECT_DIR$/pod-doublecheck.go" />
-        <option value="$PROJECT_DIR$/pro.yml" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/boot_logo.txt" />
+        <option value="$PROJECT_DIR$/pro.yml" />
+        <option value="$PROJECT_DIR$/dev-joan.yml" />
       </list>
     </option>
   </component>
@@ -885,7 +882,7 @@
       <workItem from="1480526264909" duration="552000" />
       <workItem from="1480885876470" duration="597000" />
       <workItem from="1480955182054" duration="28007000" />
-      <workItem from="1492703182862" duration="441000" />
+      <workItem from="1492703182862" duration="1628000" />
     </task>
     <servers />
   </component>
@@ -922,7 +919,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="247151000" />
+    <option name="totallyTimeSpent" value="248338000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -934,7 +931,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1269,6 +1266,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7193347">
           <caret line="253" column="5" selection-start-line="253" selection-start-column="5" selection-end-line="253" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1276,14 +1274,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36995515">
           <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev-joan.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="44" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1356,14 +1346,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pro.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="73" column="16" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
@@ -1377,13 +1359,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/boot_logo.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12552302">
+        <state vertical-scroll-proportion="0.0">
           <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
           <folding />
         </state>
       </provider>
       <provider editor-type-id="images">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pro.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="331" column="32" selection-start-line="331" selection-start-column="32" selection-end-line="331" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev-joan.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3253138">
+          <caret line="277" column="32" selection-start-line="277" selection-start-column="32" selection-end-line="277" selection-end-column="32" />
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
