@@ -82,3 +82,6 @@ Kubernetes
 
 1.1.18
 + Updated response-time limit to 400 ms.
+
+1.1.19
++ Removed onebox references from elk requests
