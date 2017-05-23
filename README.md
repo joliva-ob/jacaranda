@@ -82,3 +82,6 @@ Kubernetes
 
 1.1.18
 + Updated response-time limit to 400 ms.
+
+release/4.0.8
++ configurations for new monitoring in kubernetes cluster
