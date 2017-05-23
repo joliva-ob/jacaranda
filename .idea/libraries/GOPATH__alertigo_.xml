@@ -9,7 +9,6 @@
       <root url="file://$PROJECT_DIR$/../.." />
       <root url="file://$PROJECT_DIR$/../../../.DS_Store" />
     </CLASSES>
-    <JAVADOC />
     <SOURCES />
     <excluded>
       <root url="file://$PROJECT_DIR$/../../go-sql-driver/mysql/.git" />

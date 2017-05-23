@@ -9,7 +9,6 @@
       <root url="file://$PROJECT_DIR$/../../../gopkg.in" />
       <root url="file://$PROJECT_DIR$/../../../golang.org" />
     </CLASSES>
-    <JAVADOC />
     <SOURCES />
     <excluded>
       <root url="file://$PROJECT_DIR$/../../couchbase/go-couchbase/.git" />
