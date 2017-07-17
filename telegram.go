@@ -18,7 +18,6 @@ const (
 	STOP = "/stop"
 	LIST = "/list"
 	STATUS = "/status"
-	EXEC = "/exec"
 	POD_DOUBLECHECK = "/pod-doublecheck"
 )
 
@@ -84,7 +83,7 @@ func processMessage( message telebot.Message )  {
 			log.Info("/help requested from Chat ID: %v", message.Chat.ID)
 		case LIST:
 			alist := GetAlerts()
-			bot.SendMessage(message.Chat, "Alert rules available are:\n" + alist, nil)
+			bot.SendMessage(message.Chat, "Alert rules available are:\n"+alist, nil)
 			log.Infof("/list requested from Chat ID: %v", message.Chat.ID)
 		case START:
 			processAndNotifyWatchdogChange(message, rule, START)
@@ -92,16 +91,13 @@ func processMessage( message telebot.Message )  {
 			processAndNotifyWatchdogChange(message, rule, STOP)
 		case STATUS:
 			getCurrentStatus(message)
-//		case EXEC:
-//			execCommandLine(words,message)
+			//		case EXEC:
+			//			execCommandLine(words,message)
 		case POD_DOUBLECHECK:
 			processPodDoublecheck(words[1], &message)
 		}
-
 	}
-
 }
-
 
 
 func processPodDoublecheck(param string, message *telebot.Message) {

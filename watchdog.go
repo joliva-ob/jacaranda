@@ -30,7 +30,52 @@ var (
 
 )
 
+type ElkAggregationsMultiResponse struct {
+	Took float64 `json:"took"`
+	TimedOut bool `json:"timed_out"`
+	Shards struct {
+		Total int `json:"total"`
+		Successful int `json:"successful"`
+		Failed int `json:"failed"`
+	} `json:"_shards"`
+	Hits struct {
+		Total int `json:"total"`
+		MaxScore float64 `json:"max_score"`
+		Hits []interface{} `json:"hits"`
+	} `json:"hits"`
+	Aggregations struct {
+		TOP3SLOWINSTANCES struct {
+			DocCountErrorUpperBound int `json:"doc_count_error_upper_bound"`
+			SumOtherDocCount int `json:"sum_other_doc_count"`
+			Buckets []struct {
+				Key string `json:"key"`
+				DocCount int `json:"doc_count"`
+				AVGRSPTIME struct {
+					Value float64 `json:"value"`
+				} `json:"AVG_RSP_TIME"`
+			} `json:"buckets"`
+		} `json:"TOP_3_SLOW_INSTANCES"`
+	} `json:"aggregations"`
+}
+/*
+type ElkAggregationsMultiResponse struct {
 
+	Instances struct {
+		DocCountErrorUpperBound int `json:"doc_count_error_upper_bound"`
+		SumOtherDocCount int `json:"sum_other_doc_count"`
+		Buckets[] BucketRsp `json:"buckets"`
+	} `json:"instances"`
+
+}
+
+type BucketRsp struct {
+	Key string `json:"key"`
+	DocCount int `json:"doc_count"`
+	Avgtime struct {
+		Value float64 `json:"value"`
+	} `json:"avgtime"`
+}
+*/
 
 type ElkAggregationsResponse struct {
 
@@ -175,7 +220,11 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string, elkCh
 	case elkRsp = <- elkChan:
 		if elkRsp.Err == nil {
 			timer.Stop()
-			return processOutMetric( elkRsp.Out, rule, action )
+			if rule.Is_multivalue {
+				return processOutMetricMultivalue(elkRsp.Out, rule, action)
+			} else {
+				return processOutMetric(elkRsp.Out, rule, action)
+			}
 		}
 	case <- timer.C:
 		log.Errorf("[%v] Timeout on elk query search (%v sec)", rule.Alert_name, rule.Elk_timeout)
@@ -205,6 +254,43 @@ func processOutMetric( out elastigo.SearchResult, rule *RuleType, action string 
 	return 0
 }
 
+
+/**
+ Process response list
+ */
+func processOutMetricMultivalue( out elastigo.SearchResult, rule *RuleType, action string ) float64 {
+
+	if out.Hits.Total >= rule.Min_items {
+
+		res := new (ElkAggregationsMultiResponse)
+		if err := json.Unmarshal(out.RawJSON, &res); err != nil {
+			log.Error(err)
+		}
+
+		switch action {
+			case EVALUATE:
+				evaluateResponseMultivalue( res, rule )
+			case CHECK:
+				return getWorstInstanceTime( res )
+			}
+	}
+
+	return 0
+}
+
+
+
+func getWorstInstanceTime( res *ElkAggregationsMultiResponse) float64 {
+
+	var rspTime = float64(0)
+	for i := range res.Aggregations.TOP3SLOWINSTANCES.Buckets {
+		if res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value > rspTime {
+			rspTime = res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value
+		}
+	}
+
+	return rspTime
+}
 
 
 func elkQuerySearch( rule *RuleType, _type string, args map[string]interface{}, query interface{}, elkChan chan *ElkResponse) {
@@ -239,7 +325,6 @@ func evaluateResponse( res *ElkAggregationsResponse, rule *RuleType ) {
 
 	}
 
-
 	if isRaised {
 
 		alert_message := "Alert: rule " + rule.Alert_name + " " + strconv.FormatFloat(res.Count.Value, 'f', 0, 64) + " is " + rule.Raise_Condition + " than threshold " + strconv.FormatFloat(rule.Threshold, 'f', 0, 64)
@@ -249,6 +334,44 @@ func evaluateResponse( res *ElkAggregationsResponse, rule *RuleType ) {
 		}
 
 		log.Warning(alert_message)
+	}
+
+}
+
+
+/*
+ Evaluate the raise condition and send the message if needed from the response list
+ */
+func evaluateResponseMultivalue( res *ElkAggregationsMultiResponse, rule *RuleType ) {
+
+	isRaised := false
+	messageDetail := ""
+
+	for i := range res.Aggregations.TOP3SLOWINSTANCES.Buckets {
+
+		switch rule.Raise_Condition {
+		case BELOW:
+			if res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value < rule.Threshold {
+				isRaised = true
+				messageDetail = messageDetail + "\t\t" + res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].Key + ": " + strconv.FormatFloat(res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value, 'f', 0, 64) + " ms\n"
+			}
+		case ABOVE:
+			if res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value >= rule.Threshold {
+				isRaised = true
+				messageDetail = messageDetail + "\t\t" +  res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].Key + ": " + strconv.FormatFloat(res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value, 'f', 0, 64) + " ms\n"
+			}
+		}
+
+	}
+
+	if isRaised {
+		alertMessage := "Alert: rule " + rule.Alert_name + " is " + rule.Raise_Condition + " than threshold " + strconv.FormatFloat(rule.Threshold, 'f', 0, 64) + ":\n" + messageDetail + "\n"
+		err := sendTelegramMessage( rule.Telegram_chat_id, alertMessage)
+		if err != nil {
+			log.Error(err)
+		}
+
+		log.Warning(alertMessage)
 	}
 
 }
