@@ -22,6 +22,7 @@ var log *logging.Logger
 type RuleType struct{
 
 	Alert_name       string
+	Is_multivalue	 bool
 	Alert_status	 string
 	Telegram_chat_id int64
 	Elk_index        string

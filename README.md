@@ -85,3 +85,7 @@ Kubernetes
 
 release/4.0.8
 + configurations for new monitoring in kubernetes cluster
+
+release/4.0.16
++ Added detailed instance info for response time alert
++ Added markdown options over telegram send messages
