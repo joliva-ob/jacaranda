@@ -163,7 +163,7 @@ func watchdogRoutine( rule *RuleType, statusChan chan string) {
 				processRule( rule, elk_conn, EVALUATE, elkChan )
 			}
 		case statusAction = <- statusChan:
-			currentValue := processRule(rule, elk_conn, statusAction, elkChan )
+			currentValue, _ := processRule(rule, elk_conn, statusAction, elkChan )
 			log.Debugf("Watchdog rule %v is %v with current value of: %v", rule.Alert_name, rule.Alert_status, strconv.FormatFloat(currentValue, 'f', 0, 64))
 		}
 	}
@@ -196,7 +196,7 @@ func isTimeWindow( timeWindow string ) bool {
  on the rules defined by configuration.
  }
  */
-func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string, elkChan chan *ElkResponse  ) float64 {
+func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string, elkChan chan *ElkResponse  ) (float64, string) {
 
 	// retrieve data from index
 	args := make(map[string]interface{})
@@ -230,11 +230,11 @@ func  processRule( rule *RuleType, elk_conn *elastigo.Conn, action string, elkCh
 		log.Errorf("[%v] Timeout on elk query search (%v sec)", rule.Alert_name, rule.Elk_timeout)
 	}
 
-	return 0
+	return 0, ""
 }
 
 
-func processOutMetric( out elastigo.SearchResult, rule *RuleType, action string ) float64 {
+func processOutMetric( out elastigo.SearchResult, rule *RuleType, action string ) (float64, string) {
 
 	if out.Hits.Total >= rule.Min_items {
 
@@ -247,19 +247,20 @@ func processOutMetric( out elastigo.SearchResult, rule *RuleType, action string 
 		case EVALUATE:
 			evaluateResponse( res, rule )
 		case CHECK:
-			return res.Count.Value
+			return res.Count.Value, ""
 		}
 	}
 
-	return 0
+	return 0, ""
 }
 
 
 /**
  Process response list
  */
-func processOutMetricMultivalue( out elastigo.SearchResult, rule *RuleType, action string ) float64 {
+func processOutMetricMultivalue( out elastigo.SearchResult, rule *RuleType, action string ) (float64, string) {
 
+	// There are enough items to be able to process the rule as it was configured
 	if out.Hits.Total >= rule.Min_items {
 
 		res := new (ElkAggregationsMultiResponse)
@@ -267,29 +268,11 @@ func processOutMetricMultivalue( out elastigo.SearchResult, rule *RuleType, acti
 			log.Error(err)
 		}
 
-		switch action {
-			case EVALUATE:
-				evaluateResponseMultivalue( res, rule )
-			case CHECK:
-				return getWorstInstanceTime( res )
-			}
+		return evaluateResponseMultivalue( res, rule, action )
+
 	}
 
-	return 0
-}
-
-
-
-func getWorstInstanceTime( res *ElkAggregationsMultiResponse) float64 {
-
-	var rspTime = float64(0)
-	for i := range res.Aggregations.TOP3SLOWINSTANCES.Buckets {
-		if res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value > rspTime {
-			rspTime = res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value
-		}
-	}
-
-	return rspTime
+	return 0, ""
 }
 
 
@@ -327,7 +310,7 @@ func evaluateResponse( res *ElkAggregationsResponse, rule *RuleType ) {
 
 	if isRaised {
 
-		alert_message := "Alert: rule " + rule.Alert_name + " " + strconv.FormatFloat(res.Count.Value, 'f', 0, 64) + " is " + rule.Raise_Condition + " than threshold " + strconv.FormatFloat(rule.Threshold, 'f', 0, 64)
+		alert_message := "Alert: rule *" + rule.Alert_name + "*: *" + strconv.FormatFloat(res.Count.Value, 'f', 0, 64) + "* is " + rule.Raise_Condition + " than threshold " + strconv.FormatFloat(rule.Threshold, 'f', 0, 64)
 		err := sendTelegramMessage( rule.Telegram_chat_id, alert_message )
 		if err != nil {
 			log.Error(err)
@@ -342,38 +325,44 @@ func evaluateResponse( res *ElkAggregationsResponse, rule *RuleType ) {
 /*
  Evaluate the raise condition and send the message if needed from the response list
  */
-func evaluateResponseMultivalue( res *ElkAggregationsMultiResponse, rule *RuleType ) {
+func evaluateResponseMultivalue( res *ElkAggregationsMultiResponse, rule *RuleType,  action string ) (float64, string) {
 
 	isRaised := false
 	messageDetail := ""
+	alertMessage := ""
+	var rspTime = 0.0
 
 	for i := range res.Aggregations.TOP3SLOWINSTANCES.Buckets {
 
+		if res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value > rspTime {
+			rspTime = res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value
+		}
 		switch rule.Raise_Condition {
-		case BELOW:
-			if res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value < rule.Threshold {
-				isRaised = true
-				messageDetail = messageDetail + "\t\t" + res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].Key + ": " + strconv.FormatFloat(res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value, 'f', 0, 64) + " ms\n"
-			}
-		case ABOVE:
-			if res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value >= rule.Threshold {
-				isRaised = true
-				messageDetail = messageDetail + "\t\t" +  res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].Key + ": " + strconv.FormatFloat(res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value, 'f', 0, 64) + " ms\n"
-			}
+			case BELOW:
+				if res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value < rule.Threshold {
+					isRaised = true
+					messageDetail = messageDetail + "\t\t" + strconv.Itoa(i+1) + ". " + res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].Key + ": *" + strconv.FormatFloat(res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value, 'f', 0, 64) + "* ms\n"
+				}
+			case ABOVE:
+				if res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value >= rule.Threshold {
+					isRaised = true
+					messageDetail = messageDetail + "\t\t" + strconv.Itoa(i+1) + ". " + res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].Key + ": *" + strconv.FormatFloat(res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value, 'f', 0, 64) + "* ms\n"
+				}
 		}
 
 	}
 
-	if isRaised {
-		alertMessage := "Alert: rule " + rule.Alert_name + " is " + rule.Raise_Condition + " than threshold " + strconv.FormatFloat(rule.Threshold, 'f', 0, 64) + ":\n" + messageDetail + "\n"
+	if isRaised && action == EVALUATE {
+		alertMessage = "Alert: rule *" + rule.Alert_name + "* is " + rule.Raise_Condition + " than threshold " + strconv.FormatFloat(rule.Threshold, 'f', 0, 64) + ":\n" + messageDetail + "\n"
+		// Alert by telegram
 		err := sendTelegramMessage( rule.Telegram_chat_id, alertMessage)
 		if err != nil {
 			log.Error(err)
 		}
-
 		log.Warning(alertMessage)
 	}
 
+	return rspTime, messageDetail
 }
 
 
@@ -389,14 +378,17 @@ func getCurrentStatus( message telebot.Message ) error {
 
 		statusChan <- CHECK
 		elkChan := make(chan *ElkResponse)
-		value := processRule( &config.Rules[i], elk_conn, CHECK, elkChan)
+		value, details := processRule( &config.Rules[i], elk_conn, CHECK, elkChan)
 		alertName := config.Rules[i].Alert_name
-		alertFrame := config.Rules[i].Time_frame_sec
-		currentStatus = currentStatus + alertName + "\t" + strconv.FormatFloat(value, 'f', 0, 64) + " in " + strconv.FormatInt(alertFrame, 10) + " seconds.\n"
-
+		currentStatus = currentStatus + "*" + alertName + "* is *" + strconv.FormatFloat(value, 'f', 0, 64) + "*\n"
+		if details != "" {
+			currentStatus = currentStatus + details
+		}
 	}
 
-	bot.SendMessage(message.Chat, currentStatus, nil)
+	var options telebot.SendOptions
+	options.ParseMode = "Markdown"
+	bot.SendMessage(message.Chat, currentStatus, &options)
 	log.Infof("/status requested from Chat ID: %v", message.Chat.ID)
 
 	return nil

@@ -79,7 +79,7 @@ func processMessage( message telebot.Message )  {
 
 		switch words[0] {
 		case HELP:
-			bot.SendMessage(message.Chat, "version release/4.0.8\nBot commands available are:\n/help\n/list\n/start {alert_name}\n/stop {alert_name}\n/status\n/pod-doublecheck {>0: new_refresh_time_sec | <=0: is to disable | status: is to get current status}", nil)
+			bot.SendMessage(message.Chat, "version release/4.0.16\nBot commands available are:\n/help\n/list\n/start {alert_name}\n/stop {alert_name}\n/status\n/pod-doublecheck {>0: new_refresh_time_sec | <=0: is to disable | status: is to get current status}", nil)
 			log.Info("/help requested from Chat ID: %v", message.Chat.ID)
 		case LIST:
 			alist := GetAlerts()
@@ -132,9 +132,12 @@ func getNewRefreshtime(strTime string) (int, error) {
  */
 func sendTelegramMessage( chatId int64, text string ) error {
 
+	var options telebot.SendOptions
+	options.ParseMode = "Markdown"
 	var chat telebot.Chat
 	chat.ID = chatId
-	err := bot.SendMessage(chat, text, nil)
+
+	err := bot.SendMessage(chat, text, &options)
 
 	return err
 }
