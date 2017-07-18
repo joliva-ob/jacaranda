@@ -2,7 +2,7 @@
 # Dockerfile for Jacaranda alerting project
 #
 
-FROM golang
+FROM golang:onbuild
 
 MAINTAINER Joan Oliva
 
