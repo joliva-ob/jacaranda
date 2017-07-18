@@ -339,12 +339,12 @@ func evaluateResponseMultivalue( res *ElkAggregationsMultiResponse, rule *RuleTy
 		}
 		switch rule.Raise_Condition {
 			case BELOW:
-				if res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value < rule.Threshold {
+				if res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value < rule.Threshold || action == CHECK {
 					isRaised = true
 					messageDetail = messageDetail + "\t\t" + strconv.Itoa(i+1) + ". " + res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].Key + ": *" + strconv.FormatFloat(res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value, 'f', 0, 64) + "* ms\n"
 				}
 			case ABOVE:
-				if res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value >= rule.Threshold {
+				if res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value >= rule.Threshold || action == CHECK {
 					isRaised = true
 					messageDetail = messageDetail + "\t\t" + strconv.Itoa(i+1) + ". " + res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].Key + ": *" + strconv.FormatFloat(res.Aggregations.TOP3SLOWINSTANCES.Buckets[i].AVGRSPTIME.Value, 'f', 0, 64) + "* ms\n"
 				}

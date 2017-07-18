@@ -5,3 +5,4 @@ jacaranda.linux
 jacaranda.exe
 *.yml
 *.gcfg
+.idea/workspace.xml
